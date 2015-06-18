@@ -168,3 +168,8 @@ h5.drs-item-title{
 #drs-breadcrumbs{
   padding-bottom: 20px;
 }
+@media(max-width:800px){
+  .zoomContainer {
+    display:none;
+  }
+}
