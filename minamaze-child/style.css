@@ -169,21 +169,26 @@ h5.drs-item-title{
   padding-bottom: 20px;
 }
 
-/*to hide elevatezoom on smaller screens*/
+/*for northeastern footer logo*/
+.northeastern-logo{
+  background: url("http://www.northeastern.edu/neuhome/images/logo-footer.png") no-repeat scroll center transparent;
+  width: 180px;
+  height: 20px;
+  float: left;
+  display: inline-block;
+  overflow: auto;
+  padding: 25px;
+}
+
 @media(max-width:800px){
+  /*to hide elevatezoom on smaller screens*/
   .zoomContainer {
     display:none;
   }
-}
-
-/*for northeastern footer logo*/
-.northeastern-logo{
-  background: url("http://www.northeastern.edu/neuhome/images/logo-footer.png") no-repeat scroll left top transparent;
-  width: 180px;
-  float: left;
-}
-#footer-menu .northeastern-logo:after{
-  content:'';
+  /*fix logo on smaller screens*/
+  .northeastern-logo{
+    clear:both;
+  }
 }
 
 /*don't hide footer menu on smaller screens*/
