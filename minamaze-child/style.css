@@ -180,6 +180,10 @@ h5.drs-item-title{
   padding: 25px;
 }
 
+#pre-header-core .northeastern-logo {
+  padding:10px 0px 10px 0px;
+}
+
 @media(max-width:800px){
   /*to hide elevatezoom on smaller screens*/
   .zoomContainer {
