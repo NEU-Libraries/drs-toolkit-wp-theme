@@ -70,3 +70,11 @@ function drs_title_select() {
 		printf( __( '%s', 'lan-thinkupthemes' ), get_the_title() );
 	}
 }
+
+/*to overwrite thinkup_input_copyright() from minamaze/admin/main/options/04.footer.php*/
+
+function drs_copyright() {
+global $thinkup_footer_copyright;
+  printf( __('<address>360 Huntington Ave., Boston, Massachusetts 02115 · 617.373.2000 ·  TTY 617.373.3768<br>© 2013 Northeastern University</address>'));
+  printf( __( 'Theme developed by %1$s. Powered by %2$s.', 'lan-thinkupthemes' ) , '<a href="//www.thinkupthemes.com/" target="_blank">Think Up Themes Ltd</a>', '<a href="//www.wordpress.org/" target="_blank">Wordpress</a>');
+}

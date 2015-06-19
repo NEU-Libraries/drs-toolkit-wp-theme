@@ -168,8 +168,27 @@ h5.drs-item-title{
 #drs-breadcrumbs{
   padding-bottom: 20px;
 }
+
+/*to hide elevatezoom on smaller screens*/
 @media(max-width:800px){
   .zoomContainer {
     display:none;
+  }
+}
+
+/*for northeastern footer logo*/
+.northeastern-logo{
+  background: url("http://www.northeastern.edu/neuhome/images/logo-footer.png") no-repeat scroll left top transparent;
+  width: 180px;
+  float: left;
+}
+#footer-menu .northeastern-logo:after{
+  content:'';
+}
+
+/*don't hide footer menu on smaller screens*/
+@media only screen and (max-width: 685px) {
+  #footer-menu {
+    display: block !important;
   }
 }
