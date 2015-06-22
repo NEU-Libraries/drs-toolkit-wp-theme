@@ -92,3 +92,12 @@ function filter_media_comment_status( $open, $post_id ) {
 	return $open;
 }
 add_filter( 'comments_open', 'filter_media_comment_status', 10 , 2 );
+
+add_action( 'thinkup_sidebar_html', 'drs_sidebar');
+function drs_sidebar(){
+  global $wp_query;
+  $template_type = $wp_query->query_vars['drstk_template_type'];
+  if ($template_type == 'search'){
+    echo '<div id="sidebar"><div id="sidebar-core"></div></div>';
+  }
+}
