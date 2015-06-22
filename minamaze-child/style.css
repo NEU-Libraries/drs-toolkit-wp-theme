@@ -122,9 +122,9 @@ h5.drs-item-title{
   padding:10px;
   font-size:13px;
 }
-#drs-browse-header-row .one_fourth ul.pag {
+/*#drs-browse-header-row .one_fourth ul.pag {
   font-size:16px;
-}
+}*/
 
 
 /*thanks bootstrap*/
@@ -200,4 +200,18 @@ h5.drs-item-title{
   #footer-menu {
     display: block !important;
   }
+}
+.drs-sidebar{
+  width: 23%;
+  float: right;
+  display: block;
+  margin-top: 100px;
+}
+.drs-main{
+  width: 75%;
+  float: left;
+  display: inline-block;
+}
+.drs-sidebar .pag {
+  float:left;
 }
