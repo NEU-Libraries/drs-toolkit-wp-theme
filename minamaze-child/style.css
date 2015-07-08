@@ -45,7 +45,7 @@ Tags: black, dark, red, one-column, two-columns, three-columns, right-sidebar, l
 .drs-item{
   overflow: auto;
   border-bottom:1px solid #EEE;
-  min-height:100px;
+  min-height:150px;
 }
 .drs-item:last-of-type{
   border-bottom:none;
@@ -180,8 +180,8 @@ h5.drs-item-title{
     display: inline-block;
     overflow: auto;
 }
-#pre-header-core .northeastern-logo {
-  padding:10px;
+#pre-header-core .northeastern-logo img{
+  padding:10px 0px 10px 0px;
 }
 
 @media(max-width:800px){
