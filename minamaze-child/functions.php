@@ -80,7 +80,7 @@ global $thinkup_footer_copyright;
 
 /*adds nu logo to footer */
 function drs_nu_logo(){
-  echo '<a alt="Northeastern University" class="northeastern-logo" href="http://www.northeastern.edu"><span class="sr-only">Northeastern University</span></a>';
+  echo '<a alt="Northeastern University, University Libraries" class="northeastern-logo" href="http://www.northeastern.edu"><img alt="Northeastern University, University Libraries" src="'.get_stylesheet_directory_uri().'/nu-lib-lockup-white.svg" /><span class="sr-only">Northeastern University</span></a>';
 }
 
 /*disables comments on all attachment pages*/

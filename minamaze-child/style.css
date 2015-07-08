@@ -169,19 +169,20 @@ h5.drs-item-title{
   padding-bottom: 20px;
 }
 
-/*for northeastern footer logo*/
-.northeastern-logo{
-  background: url("http://www.northeastern.edu/neuhome/images/logo-footer.png") no-repeat scroll center transparent;
-  width: 180px;
-  height: 20px;
-  float: left;
-  display: inline-block;
-  overflow: auto;
-  padding: 25px;
+/*for northeastern logo*/
+.northeastern-logo img {
+  max-width:250px;
+  /*padding:10px;*/
 }
-
+#sub-footer-core .northeastern-logo {
+    width: 270px;
+    height: 75px;
+    float: left;
+    display: inline-block;
+    overflow: auto;
+}
 #pre-header-core .northeastern-logo {
-  padding:10px 0px 10px 0px;
+  padding:10px;
 }
 
 @media(max-width:800px){
@@ -190,8 +191,9 @@ h5.drs-item-title{
     display:none;
   }
   /*fix logo on smaller screens*/
-  .northeastern-logo{
+  #sub-footer-core .northeastern-logo{
     clear:both;
+    width:100%;
   }
 }
 
