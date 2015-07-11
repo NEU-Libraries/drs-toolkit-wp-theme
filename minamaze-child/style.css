@@ -66,8 +66,12 @@ Tags: black, dark, red, one-column, two-columns, three-columns, right-sidebar, l
   clear: right;
   margin-right: 0px !important;
 }
+.drs-item .three_fourth{
+  margin-bottom:5px;
+}
 .drs-item h4{
-  margin-top:20px;
+  margin-top:15px;
+  margin-bottom:5px;
 }
 .drs-item div:not(.dashicons){
   display:block;
