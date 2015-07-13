@@ -102,10 +102,41 @@ function drs_sidebar(){
   }
 }
 
+add_action('init', 'drs_main_menu');
+function drs_main_menu() {
+
+  $new_menu_id = wp_create_nav_menu('Main Menu');
+	$page_args_1 = array(
+    'menu-item-url' => '/search',
+		'menu-item-title' => 'Search',
+		'menu-item-status' => 'publish',
+	);
+  $page_args_2 = array(
+    'menu-item-url' => '/browse',
+    'menu-item-title' => 'Browse',
+    'menu-item-status' => 'publish',
+  );
+  $page_args_3 = array(
+    'menu-item-url' => '/collections',
+    'menu-item-title' => 'Collections',
+    'menu-item-status' => 'publish',
+  );
+	if ( $new_menu_id > 0 ) {
+		// set our new MENU up at our theme's nav menu location
+    if ( !has_nav_menu( 'header_menu' ) ) {
+      set_theme_mod( 'nav_menu_locations' , array( 'header_menu' => $new_menu_id ) );
+    }
+		// add a menu item to that new menu
+		wp_update_nav_menu_item( $new_menu_id , 0, $page_args_1 );
+    wp_update_nav_menu_item( $new_menu_id , 0, $page_args_2 );
+    wp_update_nav_menu_item( $new_menu_id , 0, $page_args_3 );
+	}
+}
+
 add_action('init', 'drs_nu_footer_menu');
 function drs_nu_footer_menu() {
 
-  $new_menu_id = wp_create_nav_menu('TEST NU Menu');
+  $new_menu_id = wp_create_nav_menu('NU Footer Menu');
 	$page_args_1 = array(
     'menu-item-url' => 'http://myneu.neu.edu/cp/home/displaylogin',
 		'menu-item-title' => 'myNEU',
