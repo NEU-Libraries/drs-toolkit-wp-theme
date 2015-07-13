@@ -188,13 +188,17 @@ h5.drs-item-title{
   padding:10px 0px 10px 0px;
 }
 
-@media(max-width:800px){
+@media(max-width:767px){
   /*to hide elevatezoom on smaller screens*/
   .zoomContainer {
     display:none;
   }
   /*fix logo on smaller screens*/
   #sub-footer-core .northeastern-logo{
+    width:100%;
+  }
+  /*expand drs-docs because facets behind button no smaller screens*/
+  #drs-docs.three_fourth.last{
     width:100%;
   }
 }
