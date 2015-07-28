@@ -176,3 +176,8 @@ function drs_nu_footer_menu() {
 
 	}
 }
+
+add_action('wp_footer', 'add_google_analytics');
+function add_google_analytics(){
+  require_once( get_stylesheet_directory() . '/analytics.php' );
+}
