@@ -20,7 +20,7 @@
 
 		<div id="sub-footer">
 		<div id="sub-footer-core">
-			<?php drs_nu_logo(); ?>
+			<?php drs_nu_footer_logo(); ?>
 
 			<?php if ( has_nav_menu( 'sub_footer_menu' ) ) : ?>
 			<?php wp_nav_menu( array( 'depth' => 1, 'container_class' => 'sub-footer-links', 'container_id' => 'footer-menu', 'theme_location' => 'sub_footer_menu' ) ); ?>

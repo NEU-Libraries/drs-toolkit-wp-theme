@@ -178,11 +178,13 @@ h5.drs-item-title{
   max-width:250px;
 }
 #sub-footer-core .northeastern-logo {
-    width: 270px;
-    height: 75px;
-    float: left;
-    display: inline-block;
-    overflow: auto;
+  background: url("http://www.northeastern.edu/neuhome/images/logo-footer.png") no-repeat scroll center transparent;
+  width: 180px;
+  height: 20px;
+  float: left;
+  display: inline-block;
+  overflow: auto;
+  padding: 25px;
 }
 #pre-header-core .northeastern-logo img{
   padding:10px 0px 10px 0px;

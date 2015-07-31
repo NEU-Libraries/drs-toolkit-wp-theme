@@ -78,9 +78,14 @@ global $thinkup_footer_copyright;
   printf( __( '<div>Theme developed by %1$s Powered by %2$s', 'lan-thinkupthemes' ) , '<a href="//www.thinkupthemes.com/" target="_blank">Think Up Themes Ltd</a>.', '<a href="//www.wordpress.org/" target="_blank">Wordpress</a>.</div>');
 }
 
-/*adds nu logo to footer */
+/*adds nu lib logo to header*/
 function drs_nu_logo(){
-  echo '<a alt="Northeastern University, University Libraries" class="northeastern-logo" href="http://www.northeastern.edu"><img alt="Northeastern University, University Libraries" src="'.get_stylesheet_directory_uri().'/nu-lib-lockup-white.svg" /><span class="sr-only">Northeastern University</span></a>';
+  echo '<a alt="Northeastern University, University Libraries" class="northeastern-logo" href="http://library.northeastern.edu"><img alt="Northeastern University, University Libraries" src="'.get_stylesheet_directory_uri().'/nu-lib-lockup-white.svg" /><span class="sr-only">Northeastern University</span></a>';
+}
+
+/*adds nu logo to footer */
+function drs_nu_footer_logo(){
+  echo '<a alt="Northeastern University, University Libraries" class="northeastern-logo" href="http://www..northeastern.edu"><span class="sr-only">Northeastern University</span></a>';
 }
 
 /*disables comments on all attachment pages*/
