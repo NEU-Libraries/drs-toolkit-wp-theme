@@ -85,7 +85,7 @@ function drs_nu_logo(){
 
 /*adds nu logo to footer */
 function drs_nu_footer_logo(){
-  echo '<a alt="Northeastern University, University Libraries" class="northeastern-logo" href="http://www..northeastern.edu"><span class="sr-only">Northeastern University</span></a>';
+  echo '<a alt="Northeastern University, University Libraries" class="northeastern-logo" href="http://www.northeastern.edu"><span class="sr-only">Northeastern University</span></a>';
 }
 
 /*disables comments on all attachment pages*/
