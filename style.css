@@ -392,3 +392,8 @@ h5.drs-item-title{
   color: #fff;
   margin-bottom:7px;
 }
+
+/*for new DSG footer*/
+#footer{
+  border-top:none;
+}
