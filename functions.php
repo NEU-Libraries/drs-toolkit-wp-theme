@@ -113,21 +113,20 @@ function drs_sidebar(){
 
 add_action('init', 'drs_main_menu');
 function drs_main_menu() {
-
-  $new_menu_id = wp_create_nav_menu('Main Menu');
+  $new_menu_id = wp_create_nav_menu('DRS Main Menu');
 	$page_args_1 = array(
-    'menu-item-url' => '/search',
-		'menu-item-title' => 'Search',
+    'menu-item-url' => site_url().'/search',
+		'menu-item-title' => get_option('drstk_search_page_title') == '' ? 'Search' : get_option('drstk_search_page_title'),
 		'menu-item-status' => 'publish',
 	);
   $page_args_2 = array(
-    'menu-item-url' => '/browse',
-    'menu-item-title' => 'Browse',
+    'menu-item-url' => site_url().'/browse',
+    'menu-item-title' => get_option('drstk_browse_page_title') == '' ? 'Browse' : get_option('drstk_browse_page_title'),
     'menu-item-status' => 'publish',
   );
   $page_args_3 = array(
-    'menu-item-url' => '/collections',
-    'menu-item-title' => 'Collections',
+    'menu-item-url' => site_url().'/collections',
+    'menu-item-title' => get_option('drstk_collections_page_title') == '' ? 'Collections' : get_option('drstk_collections_page_title'),
     'menu-item-status' => 'publish',
   );
 	if ( $new_menu_id > 0 ) {
