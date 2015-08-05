@@ -13,5 +13,12 @@ Insert your google analytics code like so:
   echo "<script type='text/javascript'>[YOUR GOOGLE ANALYTICS CODE HERE]</script>";
 ```
 
+If a project is going to need to override some of the CSS, you can add an overrides.css file (which is ignored by git) and so won't be overwritten by future git pulls from the main repo.
+
+```
+  cd /wp-content/themes/minamaze-child
+  touch overrides.css
+```
+
 
  [DRS Toolkit Plugin](https://github.com/NEU-Libraries/drs-toolkit-wordpress)
