@@ -29,15 +29,19 @@ function drs_title_select() {
 	global $post;
   global $wp_query;
   $template_type = $wp_query->query_vars['drstk_template_type'];
+  $search_title = get_option('drstk_search_page_title') == '' ? 'Search' : get_option('drstk_search_page_title');
+  $browse_title = get_option('drstk_browse_page_title') == '' ? 'Browse' : get_option('drstk_browse_page_title');
+  $collections_title = get_option('drstk_collections_page_title') == '' ? 'Collections' : get_option('drstk_collections_page_title');
+  $collection_title = get_option('drstk_collection_page_title') == '' ? 'Browse' : get_option('drstk_collection_page_title');
 
   if ($template_type == 'search'){
-    printf( __('Search', 'lan-thinkupthemes'));
+    printf( __($search_title, 'lan-thinkupthemes'));
   } elseif ($template_type == 'browse'){
-    printf( __('Browse', 'lan-thinkupthemes'));
+    printf( __($browse_title, 'lan-thinkupthemes'));
   } elseif ($template_type == 'collections'){
-    printf( __('Collections', 'lan-thinkupthemes'));
+    printf( __($collections_title, 'lan-thinkupthemes'));
   } elseif ($template_type == 'collection'){
-    printf( __('Browse', 'lan-thinkupthemes'));
+    printf( __($collection_title, 'lan-thinkupthemes'));
   } elseif ($template_type == 'item'){
     return;
   } elseif ( is_page() ) {
