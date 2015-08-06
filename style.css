@@ -226,24 +226,6 @@ h5.drs-item-title{
   float:left;
 }
 
-
-/*for tiled galleries*/
-.free-wall {
-  margin: 15px;
-}
-.brick {
-  width: 221.2px;
-}
-.info {
-  padding: 15px;
-  color: #333;
-}
-.brick img {
-  margin: 0px;
-  padding: 0px;
-  display: block;
-}
-
 /*for regular galleries*/
 /* Responsive ThinkUpSlider */
 .rslides-drstk .rslides {
@@ -396,4 +378,56 @@ h5.drs-item-title{
 /*for new DSG footer*/
 #footer{
   border-top:none;
+}
+
+/*for tiled galleries*/
+.free-wall {
+  margin: 15px;
+}
+.brick {
+  width: 221.2px;
+  background: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+  border-radius: 3px;
+  color: #333;
+  border: none;
+}
+.info {
+  padding: 15px;
+  color: #333;
+}
+.brick img {
+  margin: 0px;
+  padding: 0px;
+  display: block;
+}
+.cell{
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    background-color: #222;
+}
+.cell .info {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s linear, opacity 0.2s linear;
+  -webkit-transition: visibility 0.2s linear, opacity 0.2s linear;
+  -moz-transition: visibility 0.2s linear, opacity 0.2s linear;
+  -o-transition: visibility 0.2s linear, opacity 0.2s linear;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  color: #FFF;
+  padding:0;
+}
+.cell:hover .info{
+  visibility: visible;
+  opacity: .9;
+  transition-delay: 0;
+}
+.cell .info a{
+  display: block;
+  padding: 15px;
 }
