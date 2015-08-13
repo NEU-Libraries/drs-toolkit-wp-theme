@@ -140,50 +140,50 @@ function drs_main_menu() {
     wp_update_nav_menu_item( $new_menu_id , 0, $page_args_3 );
 	}
 }
-
-add_action('init', 'drs_nu_footer_menu');
-function drs_nu_footer_menu() {
-
-  $new_menu_id = wp_create_nav_menu('NU Footer Menu');
-	$page_args_1 = array(
-    'menu-item-url' => 'http://myneu.neu.edu/cp/home/displaylogin',
-		'menu-item-title' => 'myNEU',
-		'menu-item-status' => 'publish',
-	);
-  $page_args_2 = array(
-    'menu-item-url' => 'https://prod-web.neu.edu/webapp6/employeelookup/public/main.action',
-    'menu-item-title' => 'Find Faculty & Staff',
-    'menu-item-status' => 'publish',
-  );
-  $page_args_3 = array(
-    'menu-item-url' => 'http://www.northeastern.edu/neuhome/adminlinks/findaz.html',
-    'menu-item-title' => 'Find A-Z',
-    'menu-item-status' => 'publish',
-  );
-  $page_args_4 = array(
-    'menu-item-url' => 'http://www.northeastern.edu/emergency/index.html',
-    'menu-item-title' => 'Emergency Information',
-    'menu-item-status' => 'publish',
-  );
-  $page_args_5 = array(
-    'menu-item-url' => 'http://www.northeastern.edu/search/index.html',
-    'menu-item-title' => 'Search',
-    'menu-item-status' => 'publish',
-  );
-	if ( $new_menu_id > 0 ) {
-		// set our new MENU up at our theme's nav menu location
-    if ( !has_nav_menu( 'sub_footer_menu' ) ) {
-      set_theme_mod( 'nav_menu_locations' , array( 'sub_footer_menu' => $new_menu_id ) );
-    }
-		// add a menu item to that new menu
-		wp_update_nav_menu_item( $new_menu_id , 0, $page_args_1 );
-    wp_update_nav_menu_item( $new_menu_id , 0, $page_args_2 );
-    wp_update_nav_menu_item( $new_menu_id , 0, $page_args_3 );
-    wp_update_nav_menu_item( $new_menu_id , 0, $page_args_4 );
-    wp_update_nav_menu_item( $new_menu_id , 0, $page_args_5 );
-
-	}
-}
+//
+// add_action('init', 'drs_nu_footer_menu');
+// function drs_nu_footer_menu() {
+//
+//   $new_menu_id = wp_create_nav_menu('NU Footer Menu');
+// 	$page_args_1 = array(
+//     'menu-item-url' => 'http://myneu.neu.edu/cp/home/displaylogin',
+// 		'menu-item-title' => 'myNEU',
+// 		'menu-item-status' => 'publish',
+// 	);
+//   $page_args_2 = array(
+//     'menu-item-url' => 'https://prod-web.neu.edu/webapp6/employeelookup/public/main.action',
+//     'menu-item-title' => 'Find Faculty & Staff',
+//     'menu-item-status' => 'publish',
+//   );
+//   $page_args_3 = array(
+//     'menu-item-url' => 'http://www.northeastern.edu/neuhome/adminlinks/findaz.html',
+//     'menu-item-title' => 'Find A-Z',
+//     'menu-item-status' => 'publish',
+//   );
+//   $page_args_4 = array(
+//     'menu-item-url' => 'http://www.northeastern.edu/emergency/index.html',
+//     'menu-item-title' => 'Emergency Information',
+//     'menu-item-status' => 'publish',
+//   );
+//   $page_args_5 = array(
+//     'menu-item-url' => 'http://www.northeastern.edu/search/index.html',
+//     'menu-item-title' => 'Search',
+//     'menu-item-status' => 'publish',
+//   );
+// 	if ( $new_menu_id > 0 ) {
+// 		// set our new MENU up at our theme's nav menu location
+//     if ( !has_nav_menu( 'sub_footer_menu' ) ) {
+//       set_theme_mod( 'nav_menu_locations' , array( 'sub_footer_menu' => $new_menu_id ) );
+//     }
+// 		// add a menu item to that new menu
+// 		wp_update_nav_menu_item( $new_menu_id , 0, $page_args_1 );
+//     wp_update_nav_menu_item( $new_menu_id , 0, $page_args_2 );
+//     wp_update_nav_menu_item( $new_menu_id , 0, $page_args_3 );
+//     wp_update_nav_menu_item( $new_menu_id , 0, $page_args_4 );
+//     wp_update_nav_menu_item( $new_menu_id , 0, $page_args_5 );
+//
+// 	}
+// }
 
 add_action('wp_footer', 'add_google_analytics');
 function add_google_analytics(){

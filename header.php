@@ -40,7 +40,7 @@
 			<?php wp_nav_menu( array( 'container_class' => 'header-links', 'container_id' => 'pre-header-links-inner', 'theme_location' => 'pre_header_menu' ) ); ?>
 			<?php endif; ?>
 
-			<?php /* nu_logo */ drs_nu_logo(); ?>
+			<?php /* nu_logo */ //drs_nu_logo(); ?>
 
 			<?php /* Social Media Icons */ thinkup_input_socialmedia(); ?>
 
