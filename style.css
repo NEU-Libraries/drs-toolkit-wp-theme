@@ -431,3 +431,6 @@ h5.drs-item-title{
   display: block;
   padding: 15px;
 }
+.ellipsis + .ellipsis{
+  display: none;
+}
