@@ -103,6 +103,13 @@
   display:block;
   overflow:auto;
 }
+#content select#drs-per-page, #content select#drs-sort-option{
+  width:auto;
+  margin:0;
+}
+#drs-browse-header-row, #drs-selection{
+  padding-bottom:15px;
+}
 
 
 /*updates for modal height*/
@@ -117,4 +124,10 @@
 
 @media (min-height: 800px) {
     .modal-body { max-height: 600px; }
+}
+
+
+/*fixes for pagination*/
+.pagination{
+  margin-top:10px;
 }
