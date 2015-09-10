@@ -120,6 +120,12 @@
 .drs-facet-toggle{
   margin-bottom:10px;
 }
+#secondary .container{
+  width:auto;
+}
+#secondary h1{
+  font-size:1.5em;
+}
 
 
 
