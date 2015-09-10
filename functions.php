@@ -121,7 +121,7 @@
     } elseif ($template_type == 'collection'){
       $view = 'search';
     } elseif ($template_type == 'item'){
-      $view = 'page';
+      return;
     } elseif ( is_home() ) {
 			$view = 'blog';
 		} // Archives
