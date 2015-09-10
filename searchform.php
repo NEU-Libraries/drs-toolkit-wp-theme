@@ -1,16 +1,17 @@
 <?php
 /**
- * The template for displaying search forms.
+ * The template for displaying search form.
  *
- * @package ThinkUpThemes
+ * @package Quest
  */
-/*THIS OVERRIDES /minamaze/searchform.php*/
-?>
 
-	<div id="drs-search">
-		<form method="get" action="<?php echo esc_url( home_url( '/search/' ) ); ?>" class="searchform">
-			<label for="drs-input" class="sr-only">Search:</label>
-			<input id="drs-input" name="q" class="search" autocomplete="off" type="text" placeholder="Enter search term" value="<?php echo esc_attr( get_search_query() ); ?>">
-			<input type="submit" class="searchsubmit" value="Search">
-		</form>
-	</div>
+
+?>
+<form class="search" action="<?php echo esc_url( home_url('/search/') ); ?>/" method="get">
+	<fieldset>
+		<div class="text">
+			<input name="q" id="drs-input" type="text" placeholder="<?php esc_attr( _e( 'Search ...', 'quest' ) ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>"/>
+			<button class="fa fa-search"><?php _e( 'Search', 'quest' ) ?></button>
+		</div>
+	</fieldset>
+</form>
