@@ -68,3 +68,30 @@
     float:left;
   }
 }
+
+/*for drstk search/browse*/
+.browse .drs-item-title{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.browse .drs-item-title, .browse .drs-item-creator, .browse .drs-item-abstract, .browse .drs-item-date{
+  height:1.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.drs-facet-name{
+  display:block;
+}
+.btn-more{
+  text-transform:capitalize;
+  background-color: transparent;
+  color: #c00;
+  border: 1px solid #ddd;
+  margin: 10px 10px 0px 10px;
+}
+.drs-facet-val {
+  display:block;
+  overflow:auto;
+}
