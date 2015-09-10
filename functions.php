@@ -50,3 +50,9 @@
       wp_update_nav_menu_item( $new_menu_id , 0, $page_args_3 );
   	}
   }
+
+  /*adds analytics*/
+  add_action('wp_footer', 'add_google_analytics');
+  function add_google_analytics(){
+    require_once( get_stylesheet_directory() . '/analytics.php' );
+  }
