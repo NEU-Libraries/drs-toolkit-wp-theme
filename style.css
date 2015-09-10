@@ -16,7 +16,7 @@
  * Quest is based on Underscores http://underscores.me/, (C) 2012-2015 Automattic, Inc.
  */
 
- /*for northeastern-logo in footer*/
+ /*for northeastern-logo in footer and header*/
 .northeastern-logo{
   text-shadow: none;
   color: transparent;
@@ -33,6 +33,14 @@
   opacity: 0.6;
   position: relative;
   top: 15px;
+}
+.nu-header {
+  border-bottom:none;
+}
+.nu-header .northeastern-logo {
+  height: 50px;
+  max-width: 275px;
+  opacity: .8;
 }
 .copyright-text address{
   padding-left:15px;

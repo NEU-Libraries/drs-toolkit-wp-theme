@@ -140,3 +140,9 @@
 
 		return $view;
 	}
+
+
+  add_action( 'quest_before_header', 'nu_before_header', 10, 0 );
+  function nu_before_header(){
+    echo "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'><a href='http://northeastern.edu' target='_blank' class='northeastern-logo'></a></div></div></div></header>";
+  }
