@@ -153,6 +153,7 @@
   function quest_child_customize_register($wp_customize) {
     global $quest_child_defaults;
     $quest_child_defaults['colors_footer_link'] = 'rgb(212, 215, 217)';
+    $quest_child_defaults['colors_footer_link_hover'] = '#c00';
 
     $section_id = 'colors_footer';
     $setting_id = $section_id . '_link';
@@ -177,13 +178,37 @@
         )
       )
     );
+
+    $setting_id = $section_id . '_link_hover';
+
+    $wp_customize->add_setting(
+      $setting_id,
+      array(
+        'default'           => $quest_child_defaults[$setting_id],
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'maybe_hash_hex_color',
+      )
+    );
+
+    $wp_customize->add_control(
+      new WP_Customize_Color_Control(
+        $wp_customize,
+        $setting_id,
+        array(
+          'label'    => __( 'Link Hover Color', 'quest' ),
+          'section'  => $section_id,
+          'settings' => $setting_id
+        )
+      )
+    );
   }
 
   add_action('wp_head', 'quest_child_add_css');
   function quest_child_add_css(){
     global $quest_child_defaults;
     $footer_link_color = get_theme_mod( 'colors_footer_link', $quest_child_defaults['colors_footer_link']);
+    $footer_link_hover = get_theme_mod( 'colors_footer_link_hover', $quest_child_defaults['colors_footer_link_hover']);
     $footer_social_color = quest_get_mod( 'colors_footer_sc_si', quest_get_default('colors_footer_sc_si'));
     $footer_social_hover = quest_get_mod( 'colors_footer_sc_si_hover', quest_get_default('colors_footer_sc_si_hover'));
-     echo '<style type="text/css">footer .nav-pills > li > a, .footer a{color:'.$footer_link_color.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'}</style>';
+     echo '<style type="text/css">footer .nav-pills > li > a, .footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'}</style>';
   }
