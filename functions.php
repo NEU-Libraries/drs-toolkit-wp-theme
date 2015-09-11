@@ -1,5 +1,10 @@
 <?php
   global $quest_child_defaults;
+  $quest_child_defaults['colors_footer_link'] = 'rgb(212, 215, 217)';
+  $quest_child_defaults['colors_footer_link_hover'] = '#c00';
+  $quest_child_defaults['colors_galleries_link'] = '#c00';
+  $quest_child_defaults['colors_galleries_caption_bg'] = '#FFF'; //'#f5f5f5';
+  
   add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
   function theme_enqueue_styles() {
      wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
@@ -152,10 +157,6 @@
   add_action( 'customize_register', 'quest_child_customize_register' );
   function quest_child_customize_register($wp_customize) {
     global $quest_child_defaults;
-    $quest_child_defaults['colors_footer_link'] = 'rgb(212, 215, 217)';
-    $quest_child_defaults['colors_footer_link_hover'] = '#c00';
-    $quest_child_defaults['colors_galleries_link'] = '#c00';
-    $quest_child_defaults['colors_galleries_caption_bg'] = '#f5f5f5';
 
     $section_id = 'colors_footer';
     $setting_id = $section_id . '_link';
@@ -266,9 +267,9 @@
     global $quest_child_defaults;
     $footer_link_color = get_theme_mod( 'colors_footer_link', $quest_child_defaults['colors_footer_link']);
     $footer_link_hover = get_theme_mod( 'colors_footer_link_hover', $quest_child_defaults['colors_footer_link_hover']);
-    $footer_social_color = quest_get_mod( 'colors_footer_sc_si', quest_get_default('colors_footer_sc_si'));
-    $footer_social_hover = quest_get_mod( 'colors_footer_sc_si_hover', quest_get_default('colors_footer_sc_si_hover'));
     $gallery_bg_color = get_theme_mod( 'colors_galleries_caption_bg', $quest_child_defaults['colors_galleries_caption_bg']);
     $gallery_link_color = get_theme_mod( 'colors_galleries_link', $quest_child_defaults['colors_galleries_link']);
+    $footer_social_color = quest_get_mod( 'colors_footer_sc_si', quest_get_default('colors_footer_sc_si'));
+    $footer_social_hover = quest_get_mod( 'colors_footer_sc_si_hover', quest_get_default('colors_footer_sc_si_hover'));
      echo '<style type="text/css">footer .nav-pills > li > a, .footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick { background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}</style>';
   }
