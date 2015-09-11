@@ -126,6 +126,9 @@
 #secondary h1{
   font-size:1.5em;
 }
+.ellipsis + .ellipsis{
+  display: none;
+}
 
 
 
@@ -190,10 +193,14 @@
   opacity: .9;
   transition-delay: 0;
 }
+.cell .info > div {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+}
 .cell .info a{
   display: block;
   padding: 15px;
-}
-.ellipsis + .ellipsis{
-  display: none;
 }
