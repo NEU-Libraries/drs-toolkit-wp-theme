@@ -4,7 +4,7 @@
   $quest_child_defaults['colors_footer_link_hover'] = '#c00';
   $quest_child_defaults['colors_galleries_link'] = '#c00';
   $quest_child_defaults['colors_galleries_caption_bg'] = '#FFF'; //'#f5f5f5';
-  
+
   add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
   function theme_enqueue_styles() {
      wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
@@ -28,7 +28,7 @@
 
 
   /* adds toolkit main menu and assigns to primary*/
-  add_action('init', 'drs_main_menu');
+  add_action('switch_theme', 'drs_main_menu');
   function drs_main_menu() {
     $new_menu_id = wp_create_nav_menu('DRS Main Menu');
   	$page_args_1 = array(
@@ -46,6 +46,19 @@
       'menu-item-title' => get_option('drstk_collections_page_title') == '' ? 'Collections' : get_option('drstk_collections_page_title'),
       'menu-item-status' => 'publish',
     );
+
+    /*add stock credits page */
+
+    global $user_ID;
+    $page['post_type']    = 'page';
+    $page['post_content'] = "<h3>People</h3><br/><h5>Project Staff</h5>Fill this in with staff members.<h5>Project Alumni</h5>Fill this in with project alumni.<br/><br/><h3>Credit and Copyright</h3><h5>Citing this project</h5>Put information here about how you would like others to cite your group.<h5>Copyright and licensing</h5>Fill in this section after talking to Northeastern's copyright officer. They will help you determine what to put in this section, depending on what rights you own to your content and your own wishes on what people can do with your content.<br/><h3>DRS Project Toolkit</h3>This project was created on a customized WordPress instance using the <a href='http://dsg.neu.edu/wiki/DSG_DRS_Project_Toolkit' target='_blank'>DRS Project Toolkit</a>. These tools, as well as archival, hosting, and support systems, are provided by the Northeastern University Library Digital Scholarship group. The DSG specializes in the Digital Humanities and helps faculty, staff, and students in the Northeastern community showcase their projects to the public.";
+    $page['post_parent']  = 0;
+    $page['post_author']  = $user_ID;
+    $page['post_status']  = 'publish';
+    $page['post_title']   = 'Credit';
+    $page = apply_filters('quest_child_add_new_page', $page, 'teams');
+    $pageid = wp_insert_post ($page);
+
   	if ( $new_menu_id > 0 ) {
   		// set our new MENU up at our theme's nav menu location
       if ( !has_nav_menu( 'primary' ) ) {
@@ -55,6 +68,17 @@
   		wp_update_nav_menu_item( $new_menu_id , 0, $page_args_1 );
       wp_update_nav_menu_item( $new_menu_id , 0, $page_args_2 );
       wp_update_nav_menu_item( $new_menu_id , 0, $page_args_3 );
+      if ($pageid == 0) { /* Add Page Failed */ } {
+        $page_path = get_page_uri($pageid);
+        $page_args_4 = array(
+          'menu-item-object' => 'page',
+          'menu-item-title' => 'Credit',
+          'menu-item-object-id' => $pageid,
+          'menu-item-type' => 'post_type',
+          'menu-item-status' => 'publish',
+        );
+        wp_update_nav_menu_item( $new_menu_id, 0, $page_args_4 );
+      }
   	}
   }
 
