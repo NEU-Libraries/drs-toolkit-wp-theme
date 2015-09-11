@@ -204,3 +204,14 @@
   display: block;
   padding: 15px;
 }
+.carousel-caption{
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.carousel-inner > .item > a > img {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
