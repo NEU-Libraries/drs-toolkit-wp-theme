@@ -1,4 +1,5 @@
 <?php
+  global $quest_child_defaults;
   add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
   function theme_enqueue_styles() {
      wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
@@ -141,8 +142,48 @@
 		return $view;
 	}
 
-
+  /*adds NU LOGO to header */
   add_action( 'quest_before_header', 'nu_before_header', 10, 0 );
   function nu_before_header(){
     echo "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'><a href='http://northeastern.edu' target='_blank' class='northeastern-logo'></a></div></div></div></header>";
+  }
+
+  /*adds customization colors for footer links, footer nu logo, and header nu logo*/
+  add_action( 'customize_register', 'quest_child_customize_register' );
+  function quest_child_customize_register($wp_customize) {
+    global $quest_child_defaults;
+    $quest_child_defaults['colors_footer_link'] = 'rgb(212, 215, 217)';
+
+    $section_id = 'colors_footer';
+    $setting_id = $section_id . '_link';
+
+    $wp_customize->add_setting(
+      $setting_id,
+      array(
+        'default'           => $quest_child_defaults[$setting_id],
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'maybe_hash_hex_color',
+      )
+    );
+
+    $wp_customize->add_control(
+      new WP_Customize_Color_Control(
+        $wp_customize,
+        $setting_id,
+        array(
+          'label'    => __( 'Link Color', 'quest' ),
+          'section'  => $section_id,
+          'settings' => $setting_id
+        )
+      )
+    );
+  }
+
+  add_action('wp_head', 'quest_child_add_css');
+  function quest_child_add_css(){
+    global $quest_child_defaults;
+    $footer_link_color = get_theme_mod( 'colors_footer_link', $quest_child_defaults['colors_footer_link']);
+    $footer_social_color = quest_get_mod( 'colors_footer_sc_si', quest_get_default('colors_footer_sc_si'));
+    $footer_social_hover = quest_get_mod( 'colors_footer_sc_si_hover', quest_get_default('colors_footer_sc_si_hover'));
+     echo '<style type="text/css">footer .nav-pills > li > a, .footer a{color:'.$footer_link_color.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'}</style>';
   }
