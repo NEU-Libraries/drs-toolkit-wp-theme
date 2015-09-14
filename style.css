@@ -221,3 +221,11 @@
   background-image:none;
   opacity:1;
 }
+
+/*for single drs item*/
+.drs-item a{
+  display:block;
+}
+.drstk-caption{
+  display:inline-block;
+}
