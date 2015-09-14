@@ -204,6 +204,8 @@
   display: block;
   padding: 15px;
 }
+
+/*for bootstrap carousel*/
 .carousel-caption{
   width: 100%;
   left: 0;
@@ -214,4 +216,8 @@
   display:block;
   margin-left:auto;
   margin-right:auto;
+}
+.carousel-control.right, .carousel-control.left{
+  background-image:none;
+  opacity:1;
 }
