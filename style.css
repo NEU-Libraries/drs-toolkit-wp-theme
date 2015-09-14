@@ -211,6 +211,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  padding:25px;
 }
 .carousel-inner > .item > a > img {
   display:block;
