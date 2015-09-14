@@ -59,6 +59,17 @@
     $page = apply_filters('quest_child_add_new_page', $page, 'teams');
     $pageid = wp_insert_post ($page);
 
+    $page2['post_type'] = 'page';
+    $page2['post_content'] = '<div class="row">[drstk_gallery id="neu:rx914h41q, neu:rx914g88d, neu:rx914h14t, neu:rx914f43v" caption="on" caption-align="center" auto="on" nav="on" metadata="Title,Creator" max-height="500"]</div><div class="row"><br/><br/></div><div class="row"><div class="col-md-4"><p>Curabitur erat velit, consequat volutpat faucibus ac, lacinia at orci. Fusce commodo urna in nulla rutrum, lacinia ultrices lectus aliquam. Integer arcu augue, mollis eget sapien a, suscipit laoreet sapien. Nunc id molestie nunc, non posuere sem. Sed sodales libero sit amet tincidunt pulvinar. In est nisi, gravida nec velit vitae, tristique aliquet nisi. Proin in lacus at arcu vestibulum elementum</p><p class="text-center"><a href="#" class="btn btn-primary">Link Goes Here</a></p></div><div class="col-md-4"><p>Curabitur erat velit, consequat volutpat faucibus ac, lacinia at orci. Fusce commodo urna in nulla rutrum, lacinia ultrices lectus aliquam. Integer arcu augue, mollis eget sapien a, suscipit laoreet sapien. Nunc id molestie nunc, non posuere sem. Sed sodales libero sit amet tincidunt pulvinar. In est nisi, gravida nec velit vitae, tristique aliquet nisi. Proin in lacus at arcu vestibulum elementum</p><p class="text-center"><a href="#" class="btn btn-primary">Link Goes Here</a></p></div><div class="col-md-4"><p>Curabitur erat velit, consequat volutpat faucibus ac, lacinia at orci. Fusce commodo urna in nulla rutrum, lacinia ultrices lectus aliquam. Integer arcu augue, mollis eget sapien a, suscipit laoreet sapien. Nunc id molestie nunc, non posuere sem. Sed sodales libero sit amet tincidunt pulvinar. In est nisi, gravida nec velit vitae, tristique aliquet nisi. Proin in lacus at arcu vestibulum elementum</p><p class="text-center"><a href="#" class="btn btn-primary">Link Goes Here</a></p></div></div>';
+    $page2['post_parent']  = 0;
+    $page2['post_author']  = $user_ID;
+    $page2['post_status']  = 'publish';
+    $page2['post_title']   = 'Home';
+    $page2 = apply_filters('quest_child_add_new_page', $page2, 'teams');
+    $pageid2 = wp_insert_post ($page2);
+    update_option( 'page_on_front', $pageid2 );
+    update_option( 'show_on_front', 'page' );
+
   	if ( $new_menu_id > 0 ) {
   		// set our new MENU up at our theme's nav menu location
       if ( !has_nav_menu( 'primary' ) ) {
