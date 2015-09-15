@@ -104,7 +104,7 @@
   /*adds custom DSG footer*/
   function add_dsg_footer(){
     $dsgfooter = '<div class="dsg-footer"><div class="container"><div class="row"><div class="col-sm-12"><p>This project was created using the <a href="https://github.com/NEU-Libraries/drs-toolkit-wp-plugin" target="_blank">DRS Project Toolkit</a> with help from the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a> <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a>.</p></div></div></div></div>';
-    return $dsgfooter;
+    echo $dsgfooter;
   }
 
   /*overrides quest_page_title in template_tags to add custom DRSTK titles*/
