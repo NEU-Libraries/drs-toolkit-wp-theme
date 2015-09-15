@@ -2,6 +2,8 @@
   global $quest_child_defaults;
   $quest_child_defaults['colors_footer_link'] = 'rgb(212, 215, 217)';
   $quest_child_defaults['colors_footer_link_hover'] = '#c00';
+  $quest_child_defaults['colors_footer_dsg_bg'] = '#494949';
+  $quest_child_defaults['colors_footer_dsg_color'] = 'rgb(212, 215, 217)';
   $quest_child_defaults['colors_galleries_link'] = '#c00';
   $quest_child_defaults['colors_galleries_caption_bg'] = '#FFF'; //'#f5f5f5';
 
@@ -97,6 +99,12 @@
   add_action('wp_footer', 'add_google_analytics');
   function add_google_analytics(){
     require_once( get_stylesheet_directory() . '/analytics.php' );
+  }
+
+  /*adds custom DSG footer*/
+  function add_dsg_footer(){
+    $dsgfooter = '<div class="dsg-footer"><div class="container"><div class="row"><div class="col-sm-12"><p>This project was created using the <a href="https://github.com/NEU-Libraries/drs-toolkit-wp-plugin" target="_blank">DRS Project Toolkit</a> with help from the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a> <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a>.</p></div></div></div></div>';
+    return $dsgfooter;
   }
 
   /*overrides quest_page_title in template_tags to add custom DRSTK titles*/
@@ -204,7 +212,6 @@
         'sanitize_callback' => 'maybe_hash_hex_color',
       )
     );
-
     $wp_customize->add_control(
       new WP_Customize_Color_Control(
         $wp_customize,
@@ -227,13 +234,56 @@
         'sanitize_callback' => 'maybe_hash_hex_color',
       )
     );
-
     $wp_customize->add_control(
       new WP_Customize_Color_Control(
         $wp_customize,
         $setting_id,
         array(
           'label'    => __( 'Link Hover Color', 'quest' ),
+          'section'  => $section_id,
+          'settings' => $setting_id
+        )
+      )
+    );
+
+    $setting_id = $section_id . '_dsg_bg';
+
+    $wp_customize->add_setting(
+      $setting_id,
+      array(
+        'default'           => $quest_child_defaults[$setting_id],
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'maybe_hash_hex_color',
+      )
+    );
+    $wp_customize->add_control(
+      new WP_Customize_Color_Control(
+        $wp_customize,
+        $setting_id,
+        array(
+          'label'    => __( 'DSG Footer Background Color', 'quest' ),
+          'section'  => $section_id,
+          'settings' => $setting_id
+        )
+      )
+    );
+
+    $setting_id = $section_id . '_dsg_color';
+
+    $wp_customize->add_setting(
+      $setting_id,
+      array(
+        'default'           => $quest_child_defaults[$setting_id],
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'maybe_hash_hex_color',
+      )
+    );
+    $wp_customize->add_control(
+      new WP_Customize_Color_Control(
+        $wp_customize,
+        $setting_id,
+        array(
+          'label'    => __( 'DSG Footer Text Color', 'quest' ),
           'section'  => $section_id,
           'settings' => $setting_id
         )
@@ -304,10 +354,12 @@
     $footer_link_hover = get_theme_mod( 'colors_footer_link_hover', $quest_child_defaults['colors_footer_link_hover']);
     $gallery_bg_color = get_theme_mod( 'colors_galleries_caption_bg', $quest_child_defaults['colors_galleries_caption_bg']);
     $gallery_link_color = get_theme_mod( 'colors_galleries_link', $quest_child_defaults['colors_galleries_link']);
+    $dsg_footer_bg = get_theme_mod( 'colors_footer_dsg_bg', $quest_child_defaults['colors_footer_dsg_bg']);;
+    $dsg_footer_color = get_theme_mod( 'colors_footer_dsg_color', $quest_child_defaults['colors_footer_dsg_color']);;
     $link_color = quest_get_mod ('colors_global_accent', quest_get_default('colors_global_accent'));
     $footer_social_color = quest_get_mod( 'colors_footer_sc_si', quest_get_default('colors_footer_sc_si'));
     $footer_social_hover = quest_get_mod( 'colors_footer_sc_si_hover', quest_get_default('colors_footer_sc_si_hover'));
-     echo '<style type="text/css">footer .nav-pills > li > a, .footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}</style>';
+     echo '<style type="text/css">footer .nav-pills > li > a, .footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.dsg-footer {background-color:'.$dsg_footer_bg.';color:'.$dsg_footer_color.'}</style>';
   }
 
 

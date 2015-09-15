@@ -44,6 +44,10 @@
 .copyright-text address{
   padding-left:15px;
 }
+.dsg-footer p{
+  padding:20px;
+  margin:0px;
+}
 
 /*for nu social media icons in footer */
 .nu-social{

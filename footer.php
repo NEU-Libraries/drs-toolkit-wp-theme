@@ -24,19 +24,14 @@ $footer_container_cls = apply_filters( 'quest_footer_container_cls', 'container'
 	</footer>
 <?php endif; ?>
 
+<?php echo add_dsg_footer(); ?>
+
 <footer id="colophon" class="copyright quest-row" role="contentinfo">
 	<div class="<?php echo $footer_container_cls; ?>">
 		<div class="row">
 			<div class="col-md-12 copyright-text">
 				<?php echo apply_filters( 'quest_footer_copyright_text', quest_get_footer_copyright() ); ?>
 			</div>
-
-			<!-- <div class="col-md-6 social-icon-container clearfix"> -->
-				<!-- <ul> -->
-					<!-- <?php //quest_footer_social_icons(); ?> -->
-				<!-- </ul> -->
-			<!-- </div> -->
-
 		</div>
 		<!-- end row -->
 	</div>
