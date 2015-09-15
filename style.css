@@ -227,7 +227,7 @@
 }
 
 /*for single drs item*/
-.drs-item a{
+.drs-item a:not(.button){
   display:block;
 }
 .drstk-caption{
