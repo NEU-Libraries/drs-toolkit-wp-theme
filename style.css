@@ -79,6 +79,9 @@
     float:left;
   }
 }
+#menu-item-search form{
+  padding:15px;
+}
 
 /*for drstk search/browse*/
 .browse .drs-item-title{

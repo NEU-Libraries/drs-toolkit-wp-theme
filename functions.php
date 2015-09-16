@@ -347,6 +347,7 @@
     );
   }
 
+/* spits out css with custom variables */
   add_action('wp_head', 'quest_child_add_css');
   function quest_child_add_css(){
     global $quest_child_defaults;
@@ -380,3 +381,15 @@
      $rgb = array($r, $g, $b);
      return implode(",", $rgb); // returns the rgb values separated by commas
   }
+
+/* moves search from hover icon to plain menu */
+  function quest_search_menu_icon( $items, $args ) {
+
+  		if ( quest_get_mod( 'layout_header_search' ) && $args->theme_location === 'primary' ) {
+  			$items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children dropdown" id="menu-item-search">' .
+  			          get_search_form( false )
+  			          . '</li>';
+  		}
+
+  		return $items;
+  	}
