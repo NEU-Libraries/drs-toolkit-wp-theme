@@ -238,3 +238,9 @@
 .drs-item .fa-folder-open-o{
   font-size:80px;
 }
+figure, figcaption{
+  text-align:center;
+}
+figcaption .label{
+  border:1px solid #ddd;
+}
