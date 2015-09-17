@@ -89,7 +89,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.browse .drs-item-title, .browse .drs-item-creator, .browse .drs-item-abstract, .browse .drs-item-date{
+.browse .drs-item-title a, .browse .drs-item-creator, .browse .drs-item-abstract, .browse .drs-item-date{
   height:1.5em;
   overflow: hidden;
   text-overflow: ellipsis;
