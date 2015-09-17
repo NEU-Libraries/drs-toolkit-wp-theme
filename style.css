@@ -107,6 +107,9 @@
   width:100%;
   white-space:normal;
 }
+#drs-selection .btn-more{
+  width:auto;
+}
 .drs-facet-val {
   display:block;
   overflow:auto;
