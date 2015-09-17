@@ -10,7 +10,15 @@ Insert your google analytics code like so:
 
 ```
 <?php
-  echo "<script type='text/javascript'>[YOUR GOOGLE ANALYTICS CODE HERE]</script>";
+      echo "<script>[YOUR GOOGLE ANALYTICS CODE]
+      function add_google_tracking(){
+        jQuery('.button').on('click', function() {
+          ga('send', 'event', jQuery(this).data('label'), 'click', jQuery(this).data('pid'));
+          console.log('send', 'event', jQuery(this).data('label'), 'click', jQuery(this).data('pid'));
+        });
+      }
+      </script>
+      ";
 ```
 
 If a project is going to need to override some of the CSS, you can add an overrides.css file (which is ignored by git) and so won't be overwritten by future git pulls from the main repo.
