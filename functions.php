@@ -6,6 +6,18 @@
   $quest_child_defaults['colors_footer_dsg_color'] = 'rgb(212, 215, 217)';
   $quest_child_defaults['colors_galleries_link'] = '#c00';
   $quest_child_defaults['colors_galleries_caption_bg'] = '#FFF'; //'#f5f5f5';
+  $quest_child_defaults['colors_footer_nulogo'] = 'light';
+  $quest_child_defaults['colors_header_nulogo'] = 'light';
+  $quest_child_defaults['choices'] = array();
+  $quest_child_defaults['choices']['colors_footer_nulogo'] = array(
+			'light'   => __( 'light', 'quest' ),
+			'dark' => __( 'dark', 'quest' )
+		);
+  $quest_child_defaults['choices']['colors_header_nulogo'] = array(
+  		'light'   => __( 'light', 'quest' ),
+  		'dark' => __( 'dark', 'quest' )
+  	);
+
 
   add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
   function theme_enqueue_styles() {
@@ -201,7 +213,58 @@
   function quest_child_customize_register($wp_customize) {
     global $quest_child_defaults;
 
+    $section_id = 'colors_header';
+    $setting_id = $section_id . '_nulogo';
+
+		$wp_customize->add_setting(
+			$setting_id,
+			array(
+				'default'           => $quest_child_defaults[$setting_id],
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'quest_child_sanitize_choice'
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				$setting_id,
+				array(
+					'label'    => __( 'NU Logo Color', 'quest' ),
+					'section'  => $section_id,
+					'settings' => $setting_id,
+					'type'     => 'select',
+					'choices'  => $quest_child_defaults['choices'][$setting_id]
+				)
+			)
+		);
+
     $section_id = 'colors_footer';
+    $setting_id = $section_id . '_nulogo';
+
+		$wp_customize->add_setting(
+			$setting_id,
+			array(
+				'default'           => $quest_child_defaults[$setting_id],
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'quest_child_sanitize_choice'
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				$setting_id,
+				array(
+					'label'    => __( 'NU Logo Color', 'quest' ),
+					'section'  => $section_id,
+					'settings' => $setting_id,
+					'type'     => 'select',
+					'choices'  => $quest_child_defaults['choices'][$setting_id]
+				)
+			)
+		);
+
     $setting_id = $section_id . '_link';
 
     $wp_customize->add_setting(
@@ -355,15 +418,16 @@
     $footer_link_hover = get_theme_mod( 'colors_footer_link_hover', $quest_child_defaults['colors_footer_link_hover']);
     $gallery_bg_color = get_theme_mod( 'colors_galleries_caption_bg', $quest_child_defaults['colors_galleries_caption_bg']);
     $gallery_link_color = get_theme_mod( 'colors_galleries_link', $quest_child_defaults['colors_galleries_link']);
-    $dsg_footer_bg = get_theme_mod( 'colors_footer_dsg_bg', $quest_child_defaults['colors_footer_dsg_bg']);;
-    $dsg_footer_color = get_theme_mod( 'colors_footer_dsg_color', $quest_child_defaults['colors_footer_dsg_color']);;
+    $dsg_footer_bg = get_theme_mod( 'colors_footer_dsg_bg', $quest_child_defaults['colors_footer_dsg_bg']);
+    $dsg_footer_color = get_theme_mod( 'colors_footer_dsg_color', $quest_child_defaults['colors_footer_dsg_color']);
+    $nulogo_footer_color = get_theme_mod( 'colors_footer_nulogo', $quest_child_defaults['colors_footer_nulogo']);
+    $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
     $link_color = quest_get_mod ('colors_global_accent', quest_get_default('colors_global_accent'));
     $footer_social_color = quest_get_mod( 'colors_footer_sc_si', quest_get_default('colors_footer_sc_si'));
     $footer_social_hover = quest_get_mod( 'colors_footer_sc_si_hover', quest_get_default('colors_footer_sc_si_hover'));
     $alt_color = quest_get_mod( 'colors_global_alt', quest_get_default('colors_global_alt'));
     $text_color = quest_get_mod( 'colors_global_text', quest_get_default('colors_global_text'));
-     echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .dsg-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer
-      .nav-pills > li > a:focus{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.dsg-footer {background-color:'.$dsg_footer_bg.';color:'.$dsg_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'}</style>';
+    echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .dsg-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.dsg-footer {background-color:'.$dsg_footer_bg.';color:'.$dsg_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'} footer .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/brand-footer-image-'.$nulogo_footer_color.'.svg);} .nu-header .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/brand-footer-image-'.$nulogo_footer_color.'.svg);}</style>';
   }
 
 
@@ -384,12 +448,23 @@
 
 /* moves search from hover icon to plain menu */
   function quest_search_menu_icon( $items, $args ) {
+		if ( quest_get_mod( 'layout_header_search' ) && $args->theme_location === 'primary' ) {
+			$items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children dropdown" id="menu-item-search">' .
+			          get_search_form( false )
+			          . '</li>';
+		}
 
-  		if ( quest_get_mod( 'layout_header_search' ) && $args->theme_location === 'primary' ) {
-  			$items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children dropdown" id="menu-item-search">' .
-  			          get_search_form( false )
-  			          . '</li>';
-  		}
+		return $items;
+	}
 
-  		return $items;
-  	}
+  function quest_child_sanitize_choice( $value, $setting ) {
+    global $quest_child_defaults;
+		if ( is_object( $setting ) ) {
+			$setting = $setting->id;
+		}
+		$options = $quest_child_defaults['choices'][$setting];
+		if ( ! in_array( $value, array_keys( $options ) ) ) {
+			$value = $quest_child_defaults[$setting];
+		}
+		return $value;
+	}

@@ -28,8 +28,9 @@
   transition: all 1s;
   max-width: 215px;
   display: block;
-  background: url(images/brand-footer-image-white.svg) top left no-repeat;
   background-size: contain;
+  background-position:top left;
+  background-repeat:no-repeat;
   opacity: .8;
   position: relative;
   top: 15px;
