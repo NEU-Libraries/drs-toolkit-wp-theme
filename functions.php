@@ -103,7 +103,7 @@
 
   /*adds custom DSG footer*/
   function add_dsg_footer(){
-    $dsgfooter = '<div class="dsg-footer"><div class="container"><div class="row"><div class="col-sm-12"><p>This project was created using the <a href="https://github.com/NEU-Libraries/drs-toolkit-wp-plugin" target="_blank">DRS Project Toolkit</a> with help from the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a> <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a>.</p></div></div></div></div>';
+    $dsgfooter = '<div class="dsg-footer"><div class="container"><div class="row"><div class="col-sm-12"><p>This project was created using the <a href="https://github.com/NEU-Libraries/drs-toolkit-wp-plugin" target="_blank">DRS Project Toolkit</a> with help from the <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a> at the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a>.</p></div></div></div></div>';
     echo $dsgfooter;
   }
 
@@ -362,7 +362,7 @@
     $footer_social_hover = quest_get_mod( 'colors_footer_sc_si_hover', quest_get_default('colors_footer_sc_si_hover'));
     $alt_color = quest_get_mod( 'colors_global_alt', quest_get_default('colors_global_alt'));
     $text_color = quest_get_mod( 'colors_global_text', quest_get_default('colors_global_text'));
-     echo '<style type="text/css">footer .nav-pills > li > a, .footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer
+     echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .dsg-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer
       .nav-pills > li > a:focus{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.dsg-footer {background-color:'.$dsg_footer_bg.';color:'.$dsg_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'}</style>';
   }
 
