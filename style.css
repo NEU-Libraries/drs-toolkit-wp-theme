@@ -254,3 +254,6 @@ figcaption .label{
 .drs-item figure a{
   text-decoration: none;
 }
+.home #content .entry-title {
+display: none;
+}

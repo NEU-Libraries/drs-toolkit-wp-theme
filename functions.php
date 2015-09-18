@@ -1,6 +1,6 @@
 <?php
   global $quest_child_defaults;
-  $quest_child_defaults['colors_footer_link'] = 'rgb(212, 215, 217)';
+  $quest_child_defaults['colors_footer_link'] = '#d44040';
   $quest_child_defaults['colors_footer_link_hover'] = '#c00';
   $quest_child_defaults['colors_footer_dsg_bg'] = '#494949';
   $quest_child_defaults['colors_footer_dsg_color'] = 'rgb(212, 215, 217)';
