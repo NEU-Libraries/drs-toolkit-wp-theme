@@ -257,3 +257,6 @@ figcaption .label{
 .home #content .entry-title {
 display: none;
 }
+.drs-item-details b{
+  font-weight:bold;
+}
