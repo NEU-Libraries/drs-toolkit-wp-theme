@@ -15,7 +15,9 @@
  * Quest, like WordPress, is licensed under the GPL.
  * Quest is based on Underscores http://underscores.me/, (C) 2012-2015 Automattic, Inc.
  */
- a{
+
+ span a, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, p a, a {
+   text-shadow:none;
    font-weight:regular;
  }
  .site-title a:hover, .site-title a:focus{
