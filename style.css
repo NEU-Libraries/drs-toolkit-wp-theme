@@ -257,6 +257,13 @@ figcaption .label{
 .home #content .entry-title {
 display: none;
 }
-.drs-item-details b{
+.drs-item-details b, .drs-field-label, .drs-field-label b{
   font-weight:bold;
+}
+.drs-field-label:after{
+  content:':';
+}
+.drs-field-value{
+  padding-left:5px;
+  font-weight:normal;
 }
