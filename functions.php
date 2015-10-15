@@ -526,3 +526,13 @@
 		}
 		return $value;
 	}
+
+  function quest_main_cls() {
+		$view = quest_get_view();
+		$pos  = quest_get_mod( 'layout_' . $view . '_sidebar' );
+		if ( $pos === 'none' || !is_active_sidebar('sidebar-1')) {
+			echo 'col-md-12';
+		} else {
+			echo 'col-md-9';
+		}
+	}
