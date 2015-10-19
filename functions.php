@@ -6,22 +6,27 @@
   $quest_child_defaults['colors_footer_dsg_color'] = 'rgb(212, 215, 217)';
   $quest_child_defaults['colors_galleries_link'] = '#c00';
   $quest_child_defaults['colors_galleries_caption_bg'] = '#FFF'; //'#f5f5f5';
-  $quest_child_defaults['colors_footer_nulogo'] = 'light';
-  $quest_child_defaults['colors_header_nulogo'] = 'light';
+  $quest_child_defaults['colors_footer_nulogo'] = 'nu-light';
+  $quest_child_defaults['colors_header_nulogo'] = 'nu-light';
+  $quest_child_defaults['colors_global_button_bg'] = '#FFF';
+  $quest_child_defaults['colors_global_button_color'] = '#c00';
   $quest_child_defaults['choices'] = array();
   $quest_child_defaults['choices']['colors_footer_nulogo'] = array(
-			'light'   => __( 'light', 'quest' ),
-			'dark' => __( 'dark', 'quest' )
+			'nu-light'   => __( 'Northeastern Logo- light', 'quest' ),
+			'nu-dark' => __( 'Northeastern Logo- dark', 'quest' )
 		);
   $quest_child_defaults['choices']['colors_header_nulogo'] = array(
-  		'light'   => __( 'light', 'quest' ),
-  		'dark' => __( 'dark', 'quest' )
+  		'lib-light'   => __( 'Library Logo- light', 'quest' ),
+  		'lib-dark' => __( 'Library Logo-dark', 'quest' ),
+      'nu-light'   => __( 'Northeastern Logo- light', 'quest' ),
+  		'nu-dark' => __( 'Northeastern Logo- dark', 'quest' ),
   	);
 
 
   add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
   function theme_enqueue_styles() {
      wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+     wp_enqueue_style( 'override-style', get_stylesheet_directory_uri() . '/overrides.css' );
   }
 
   /*adds NU footer */
@@ -212,6 +217,57 @@
   add_action( 'customize_register', 'quest_child_customize_register' );
   function quest_child_customize_register($wp_customize) {
     global $quest_child_defaults;
+
+    $section_id = 'colors_global';
+    $setting_id = $section_id . '_button_bg';
+
+		$wp_customize->add_setting(
+			$setting_id,
+			array(
+				'default'           => $quest_child_defaults[$setting_id],
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'quest_child_sanitize_choice'
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				$setting_id,
+				array(
+					'label'    => __( 'Button Background Color', 'quest' ),
+					'section'  => $section_id,
+					'settings' => $setting_id,
+					'type'     => 'select',
+					'choices'  => $quest_child_defaults['choices'][$setting_id]
+				)
+			)
+		);
+
+    $setting_id = $section_id . '_button_color';
+
+		$wp_customize->add_setting(
+			$setting_id,
+			array(
+				'default'           => $quest_child_defaults[$setting_id],
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'quest_child_sanitize_choice'
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				$setting_id,
+				array(
+					'label'    => __( 'Button Text and Border Color', 'quest' ),
+					'section'  => $section_id,
+					'settings' => $setting_id,
+					'type'     => 'select',
+					'choices'  => $quest_child_defaults['choices'][$setting_id]
+				)
+			)
+		);
 
     $section_id = 'colors_header';
     $setting_id = $section_id . '_nulogo';
@@ -422,12 +478,14 @@
     $dsg_footer_color = get_theme_mod( 'colors_footer_dsg_color', $quest_child_defaults['colors_footer_dsg_color']);
     $nulogo_footer_color = get_theme_mod( 'colors_footer_nulogo', $quest_child_defaults['colors_footer_nulogo']);
     $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
+    if (strpos($nulogo_header_color, "lib") !== false){ $logo_height = ".nu-header .northeastern-logo{height:70px;}";} else {$logo_height = ".nu-header .northeastern-logo{height:50px;}";}
+    $btn_color = get_theme_mod( 'colors_global_button_color', $quest_child_defaults['colors_global_button_color']);
     $link_color = quest_get_mod ('colors_global_accent', quest_get_default('colors_global_accent'));
     $footer_social_color = quest_get_mod( 'colors_footer_sc_si', quest_get_default('colors_footer_sc_si'));
     $footer_social_hover = quest_get_mod( 'colors_footer_sc_si_hover', quest_get_default('colors_footer_sc_si_hover'));
     $alt_color = quest_get_mod( 'colors_global_alt', quest_get_default('colors_global_alt'));
     $text_color = quest_get_mod( 'colors_global_text', quest_get_default('colors_global_text'));
-    echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .dsg-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .dsg-footer p a:hover{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.dsg-footer {background-color:'.$dsg_footer_bg.';color:'.$dsg_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'} footer .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/brand-footer-image-'.$nulogo_footer_color.'.svg);} .nu-header .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/brand-footer-image-'.$nulogo_footer_color.'.svg);}</style>';
+    echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .dsg-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .dsg-footer p a:hover{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.dsg-footer {background-color:'.$dsg_footer_bg.';color:'.$dsg_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'} footer .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/'.$nulogo_footer_color.'.svg);} .nu-header .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/'.$nulogo_header_color.'.svg);} '.$logo_height.'.btn{color:'.$btn_color.';}</style>';
   }
 
 
@@ -467,4 +525,14 @@
 			$value = $quest_child_defaults[$setting];
 		}
 		return $value;
+	}
+
+  function quest_main_cls() {
+		$view = quest_get_view();
+		$pos  = quest_get_mod( 'layout_' . $view . '_sidebar' );
+		if ( $pos === 'none' || !is_active_sidebar('sidebar-1')) {
+			echo 'col-md-12';
+		} else {
+			echo 'col-md-9';
+		}
 	}

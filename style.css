@@ -268,6 +268,22 @@ figcaption .label{
 .home #content .entry-title {
 display: none;
 }
-.drs-item-details b{
+.drs-item-details b, .drs-field-label, .drs-field-label b{
   font-weight:bold;
+}
+.drs-field-label:after{
+  content:':';
+}
+.drs-field-value{
+  padding-left:5px;
+  font-weight:normal;
+}
+
+/*fixes for ugly dropdown menus*/
+.main-navigation .nav > li > a{
+  line-height:48px !important;
+  padding-top:6px;
+}
+.main-navigation .nav .dropdown-menu .dropdown-menu {
+  margin-top: -1px !important;
 }
