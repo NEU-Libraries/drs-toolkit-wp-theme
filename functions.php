@@ -32,6 +32,7 @@
   function theme_enqueue_styles() {
      wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
      wp_enqueue_style( 'override-style', get_stylesheet_directory_uri() . '/overrides.css' );
+     wp_enqueue_script( 'header-helper', get_stylesheet_directory_uri() . '/header_helper.js', array( 'jquery' ));
   }
 
   /*adds NU footer */
