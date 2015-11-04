@@ -10,11 +10,11 @@
   $quest_child_defaults['colors_header_nulogo'] = 'nu-light';
   $quest_child_defaults['colors_global_button_bg'] = '#c00';
   $quest_child_defaults['colors_global_button_color'] = '#FFF';
-  $quest_child_defaults['colors_panels_color'] = '#333'; //.panel-default > .panel-body {color}
-  $quest_child_defaults['colors_panels_bg_color'] = '#FFF'; //.panel-default > .panel-body {background-color}
-  $quest_child_defaults['colors_panels_border_color'] = '#ddd'; //.panel-default > .panel-heading {border-color}
-  $quest_child_defaults['colors_panels_header_color'] = '#333'; //.panel-default > .panel-heading {color}
-  $quest_child_defaults['colors_panels_header_bg_color'] = '#f5f5f5'; //.panel-default > .panel-heading {background-color}
+  $quest_child_defaults['colors_panels_color'] = '#333';
+  $quest_child_defaults['colors_panels_bg_color'] = '#FFF';
+  $quest_child_defaults['colors_panels_border_color'] = '#ddd';
+  $quest_child_defaults['colors_panels_header_color'] = '#333';
+  $quest_child_defaults['colors_panels_header_bg_color'] = '#f5f5f5';
   $quest_child_defaults['choices'] = array();
   $quest_child_defaults['choices']['colors_footer_nulogo'] = array(
 			'nu-light'   => __( 'Northeastern Logo- light', 'quest' ),
