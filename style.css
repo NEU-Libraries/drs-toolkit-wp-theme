@@ -115,6 +115,7 @@
   display:block;
   overflow:auto;
   border-bottom:1px dotted #eee;
+  padding: 5px 0px 5px 0px;
 }
 #content select#drs-per-page, #content select#drs-sort-option{
   width:auto;
