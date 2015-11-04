@@ -114,6 +114,7 @@
 .drs-facet-val {
   display:block;
   overflow:auto;
+  border-bottom:1px dotted #eee;
 }
 #content select#drs-per-page, #content select#drs-sort-option{
   width:auto;
@@ -275,4 +276,8 @@ display: none;
 }
 .main-navigation .nav .dropdown-menu .dropdown-menu {
   margin-top: -1px !important;
+}
+
+.panel-body{
+  font-size:90%;
 }
