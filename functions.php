@@ -29,12 +29,16 @@
   	);
 
 
-  add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
   function theme_enqueue_styles() {
-     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-     wp_enqueue_style( 'override-style', get_stylesheet_directory_uri() . '/overrides.css' );
-     wp_enqueue_script( 'header-helper', get_stylesheet_directory_uri() . '/header_helper.js', array( 'jquery' ));
+     wp_register_script( 'header-helper', get_stylesheet_directory_uri() . '/header_helper.js', array( 'jquery' ));
+     wp_register_style('parent-style', get_template_directory_uri() . '/style.css');
+     wp_register_style('override-style', get_stylesheet_directory_uri() . '/overrides.css');
+     wp_enqueue_style( 'parent-style' );
+     wp_enqueue_style( 'override-style');
+     wp_enqueue_script( 'header-helper');
   }
+  add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
+
 
   /*adds NU footer */
   function quest_get_footer_copyright(){
@@ -134,6 +138,7 @@
   /*overrides quest_page_title in template_tags to add custom DRSTK titles*/
   function quest_page_title() {
     global $wp_query;
+    add_filter('query_vars', 'drstk_add_query_var');
     $template_type = $wp_query->query_vars['drstk_template_type'];
     $search_title = get_option('drstk_search_page_title') == '' ? 'Search' : get_option('drstk_search_page_title');
     $browse_title = get_option('drstk_browse_page_title') == '' ? 'Browse' : get_option('drstk_browse_page_title');
@@ -183,7 +188,12 @@
 
 		// Blog
     global $wp_query;
-    $template_type = $wp_query->query_vars['drstk_template_type'];
+    add_filter('query_vars', 'drstk_add_query_var');
+    if (isset($wp_query->query_vars['drstk_template_type'])){
+      $template_type = $wp_query->query_vars['drstk_template_type'];
+    } else {
+      $template_type = '';
+    }
 
     if ($template_type == 'search'){
       $view = 'search';
@@ -706,3 +716,11 @@
 			echo 'col-md-9';
 		}
 	}
+
+  add_filter( 'plugin_action_links', 'disable_plugin_deactivation', 10, 4 );
+  function disable_plugin_deactivation( $actions, $plugin_file, $plugin_data, $context ) {
+    // Remove edit and deactive link for drs-tk plugin
+    if ( array_key_exists( 'edit', $actions ) && in_array( $plugin_file, array( 'drs-tk/drs-tk.php'))) unset( $actions['edit'] );
+    if ( array_key_exists( 'deactivate', $actions ) && in_array( $plugin_file, array( 'drs-tk/drs-tk.php'))) unset( $actions['deactivate'] );
+    return $actions;
+   }
