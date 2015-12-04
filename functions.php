@@ -227,7 +227,7 @@
   /*adds NU LOGO to header */
   add_action( 'quest_before_header', 'nu_before_header', 10, 0 );
   function nu_before_header(){
-    echo "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'><a href='http://northeastern.edu' target='_blank' class='northeastern-logo'></a></div></div></div></header>";
+    echo "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'><a href='http://northeastern.edu' target='_blank' class='northeastern-logo'><span class='sr-only'>Northeastern University</span></a></a></div></div></div></header>";
   }
 
   /*adds customization colors for footer links, footer nu logo, and header nu logo*/
