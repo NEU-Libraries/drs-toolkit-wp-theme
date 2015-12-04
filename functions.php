@@ -139,7 +139,7 @@
   function quest_page_title() {
     global $wp_query;
     add_filter('query_vars', 'drstk_add_query_var');
-    $template_type = $wp_query->query_vars['drstk_template_type'];
+    $template_type = isset($wp_query->query_vars['drstk_template_type']) ? $wp_query->query_vars['drstk_template_type'] : "";
     $search_title = get_option('drstk_search_page_title') == '' ? 'Search' : get_option('drstk_search_page_title');
     $browse_title = get_option('drstk_browse_page_title') == '' ? 'Browse' : get_option('drstk_browse_page_title');
     $collections_title = get_option('drstk_collections_page_title') == '' ? 'Collections' : get_option('drstk_collections_page_title');
@@ -724,3 +724,24 @@
     if ( array_key_exists( 'deactivate', $actions ) && in_array( $plugin_file, array( 'drs-tk/drs-tk.php'))) unset( $actions['deactivate'] );
     return $actions;
    }
+
+ add_filter('relevanssi_pre_excerpt_content', 'remove_hidden_tags', 10, 3);
+ function remove_hidden_tags($content) {
+  $content = do_shortcode($content);
+  $content = preg_replace("/<div class=\"hidden\"[^>]*>(.*)<\/div>/", "", $content);
+  $content = preg_replace("/<div class=\'hidden\'>(.*?)<\/div>/s", "", $content);
+  $content = preg_replace('/<div class="hidden">(.*?)<\/div>/s', "", $content);
+  $content = preg_replace("/<br\/>/", " ", $content);
+  // write_log($content);
+  return $content;
+ }
+
+ if ( ! function_exists('write_log')) {
+  function write_log ( $log )  {
+     if ( is_array( $log ) || is_object( $log ) ) {
+        error_log( print_r( $log, true ) );
+     } else {
+        error_log( $log );
+     }
+  }
+}
