@@ -179,6 +179,8 @@
 }
 .info {
   padding: 15px;
+  text-align:left;
+  font-style: normal;
 }
 .brick img {
   margin: 0px;
