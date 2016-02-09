@@ -188,6 +188,12 @@
   display: block;
   width: 100%;
 	max-width: 100%;
+  /*width: auto;
+max-width: 100%;
+position: relative;
+height: 100%;
+margin-left: auto;
+margin-right: auto;*/
 }
 .cell{
     background-position: top center;
@@ -256,6 +262,7 @@
 }
 .drs-item .fa-folder-open-o{
   font-size:80px;
+  padding:45px;
 }
 figure, figcaption{
   text-align:center;
