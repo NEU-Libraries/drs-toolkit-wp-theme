@@ -161,10 +161,16 @@
     .modal-body { max-height: 600px; }
 }
 
+#drs_item_modal .modal-body{
+  max-height:100%;
+}
 
 /*fixes for pagination*/
 .pagination{
   margin-top:10px;
+}
+#drs_item_modal .pagination{
+  margin:0;
 }
 
 /*for tiled galleries*/
@@ -302,3 +308,10 @@ display: none;
 
 /*fis for no flash images on certain versions of ios*/
 .issuuembed .read-link img{left:0 !important;}
+
+#single_carousel .carousel-caption{
+  display:none;
+}
+#single_carousel:hover .carousel-caption{
+  display:block;
+}
