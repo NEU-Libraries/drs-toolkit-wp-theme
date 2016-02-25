@@ -310,6 +310,7 @@ display: none;
 .issuuembed .read-link img{left:0 !important;}
 
 #single_carousel .carousel-caption{
+  padding:10px;
   display:none;
 }
 #single_carousel:hover .carousel-caption{
