@@ -30,3 +30,6 @@ If a project is going to need to override some of the CSS, you can add an overri
 
 
  [DRS Toolkit Plugin](https://github.com/NEU-Libraries/drs-toolkit-wordpress)
+
+
+If you would like menus on single pages/posts (not drs items) that reflect menu hierarchy, install and enable "[Menu Breadcrumb](https://wordpress.org/plugins/menu-breadcrumb/)" Wordpress plugin.

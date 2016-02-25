@@ -746,3 +746,93 @@
      }
   }
 }
+
+// remove core Menu Breadcrumb item markup filter
+remove_all_filters( 'menu_breadcrumb_item_markup' );
+
+// add my own Menu Breadcrumb item filter
+function my_menu_breadcrumb_item_markup( $markup, $breadcrumb ) {
+    // $markup is in the format of <a href="{Menu Item URL}">{Menu Item Title}</a>
+    // $breadcrumb is the Menu item object itself
+    return '<li>' . $markup . '</li>';
+}
+add_filter( 'menu_breadcrumb_item_markup', 'my_menu_breadcrumb_item_markup', 10, 2 );
+
+// overrides the default breadcrumb behavior -- this allows single pages/posts to have their menu placement reflect their breadcrumb path (not drs items)
+function quest_breadcrumb() {
+  global $post;
+
+  if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
+    woocommerce_breadcrumb( array(
+      'wrap_before' => '<ul class="breadcrumbs">',
+      'wrap_after'  => '</ul>',
+      'delimiter'   => '',
+      'before'      => '<li>',
+      'after'       => '</li>'
+    ) );
+
+    return;
+  }
+
+  if ( function_exists( 'is_bbpress' ) && is_bbpress() ) {
+    echo '<ul class="breadcrumbs">';
+    bbp_breadcrumb( array(
+      'delimiter' => '',
+      'before'    => '<li>',
+      'after'     => '</li>'
+    ) );
+    echo '</ul>';
+
+    return;
+  }
+
+
+  echo '<ul class="breadcrumbs">';
+
+  if ( ! is_front_page() ) {
+    echo '<li><a href="';
+    echo home_url();
+    echo '">' . __( 'Home', 'quest' );
+    echo "</a></li>";
+  }
+
+  if ( is_category() || is_single() && ! is_singular( 'portfolio' ) ) {
+    $category = get_the_category();
+    if ( isset( $category[0] ) ) {
+      $ID = $category[0]->cat_ID;
+      echo '<li>' . get_category_parents( $ID, true, '', false ) . '</li>';
+    }
+  }
+
+  if ( is_singular( 'portfolio' ) ) {
+    echo get_the_term_list( $post->ID, 'portfolio_category', '<li>', ' - ', '</li>' );
+  }
+  if ( is_home() ) {
+    echo '<li>' . get_option( 'blog_title', 'Blog' ) . '</li>';
+  }
+  if ( is_single() || is_page() ) {
+    //this is the only part modified from this function
+    if (class_exists('Menu_Breadcrumb')){ //check to see if the menu_breadcrumb plugin is turned on
+      $menu_breadcrumb = new Menu_Breadcrumb( 'primary' );   // 'primary' is the Menu Location for quest
+      $breadcrumb_array = $menu_breadcrumb->generate_trail();
+      $breadcrumb_markup = $menu_breadcrumb->generate_markup( $breadcrumb_array, '' );
+      echo $breadcrumb_markup;
+    } else { //otherwise default to old quest behavior
+      echo '<li>' . get_the_title() . '</li>';
+    }
+  }
+  if ( is_tag() ) {
+    echo '<li>' . "Tag: " . single_tag_title( '', false ) . '</li>';
+  }
+  if ( is_404() ) {
+    echo '<li>' . __( "404 - Page not Found", 'quest' ) . '</li>';
+  }
+  if ( is_search() ) {
+    echo '<li>' . __( "Search", 'quest' ) . '</li>';
+  }
+  if ( is_year() ) {
+    echo '<li>' . get_the_time( 'Y' ) . '</li>';
+  }
+
+  echo "</ul>";
+}
