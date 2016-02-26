@@ -823,12 +823,12 @@ function quest_breadcrumb() {
   		// Step through ancestors array to build breadcrumb
   		foreach($ancestors as $i => $text)
   		{
-  			$breadcrumb[$i] = '<li><a href="' . get_page_link($text) . '" title="' . attribute_escape(apply_filters('the_title', $text->post_title)) . '">'.ucfirst(strtolower(get_the_title($text))).'</a></li>';
+  			$breadcrumb[$i] = '<li><a href="' . get_page_link($text) . '" title="' . attribute_escape(apply_filters('the_title', $text->post_title)) . '">'.get_the_title($text).'</a></li>';
   		}
   	}
 
   	// Insert a link to the current page
-  	$breadcrumb[] = '<li><a href="' . get_page_link($current->ID) . '" title="' . attribute_escape(apply_filters('the_title', $current->post_title)) . '">'.ucfirst(strtolower(get_the_title($current))).'</a></li>';
+  	$breadcrumb[] = '<li><a href="' . get_page_link($current->ID) . '" title="' . attribute_escape(apply_filters('the_title', $current->post_title)) . '">'.get_the_title($current).'</a></li>';
 
   	// Display breacrumb with demarcator
   	echo implode('', $breadcrumb);
