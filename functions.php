@@ -812,14 +812,26 @@ function quest_breadcrumb() {
   }
   if ( is_single() || is_page() ) {
     //this is the only part modified from this function
-    if (class_exists('Menu_Breadcrumb')){ //check to see if the menu_breadcrumb plugin is turned on
-      $menu_breadcrumb = new Menu_Breadcrumb( 'primary' );   // 'primary' is the Menu Location for quest
-      $breadcrumb_array = $menu_breadcrumb->generate_trail();
-      $breadcrumb_markup = $menu_breadcrumb->generate_markup( $breadcrumb_array, '' );
-      echo $breadcrumb_markup;
-    } else { //otherwise default to old quest behavior
-      echo '<li>' . get_the_title() . '</li>';
-    }
+    $breadcrumb = array();
+  	// Get current page
+    $current = $post;
+
+  	// Check if current post has ancestors
+  	if($current->ancestors) {
+  		$ancestors = array_reverse($current->ancestors);
+
+  		// Step through ancestors array to build breadcrumb
+  		foreach($ancestors as $i => $text)
+  		{
+  			$breadcrumb[$i] = '<li><a href="' . get_page_link($text) . '" title="' . attribute_escape(apply_filters('the_title', $text->post_title)) . '">'.ucfirst(strtolower(get_the_title($text))).'</a></li>';
+  		}
+  	}
+
+  	// Insert a link to the current page
+  	$breadcrumb[] = '<li><a href="' . get_page_link($current->ID) . '" title="' . attribute_escape(apply_filters('the_title', $current->post_title)) . '">'.ucfirst(strtolower(get_the_title($current))).'</a></li>';
+
+  	// Display breacrumb with demarcator
+  	echo implode('', $breadcrumb);
   }
   if ( is_tag() ) {
     echo '<li>' . "Tag: " . single_tag_title( '', false ) . '</li>';
