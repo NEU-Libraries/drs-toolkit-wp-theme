@@ -30,7 +30,12 @@
 
 
   function theme_enqueue_styles() {
-    wp_register_script('header-helper', get_stylesheet_directory_uri() . '/header_helper.js', array( 'jquery' ));
+    if (file_exists(dirname(__FILE__) . '/overrides/scripts.js')) {
+      wp_register_script('header-helper', get_stylesheet_directory_uri() . '/overrides/scripts.js', array( 'jquery' ));
+    } else {
+      wp_register_script('header-helper', get_stylesheet_directory_uri() . '/scripts.js', array( 'jquery' ));
+    }
+
     wp_register_style('parent-style', get_template_directory_uri() . '/style.css');
 
     // check for custom override styles
