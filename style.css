@@ -316,3 +316,15 @@ display: none;
 #single_carousel:hover .carousel-caption{
   display:block;
 }
+
+
+/* for associated files display */
+.assoc_files{
+  margin-top:30px;
+}
+.assoc_files .panel-body{
+  font-size:90%;
+}
+.assoc_files img{
+  float:right;
+}
