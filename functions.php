@@ -849,3 +849,8 @@ function quest_breadcrumb() {
 
   echo "</ul>";
 }
+
+// custom functions.php file allowed in overrides folder
+if (file_exists(dirname(__FILE__) . '/overrides/functions.php')) {
+  require_once('overrides/functions.php');
+}
