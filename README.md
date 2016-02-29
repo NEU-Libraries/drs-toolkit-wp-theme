@@ -21,11 +21,17 @@ Insert your google analytics code like so:
       ";
 ```
 
-If a project is going to need to override some of the CSS, you can add an overrides.css file (which is ignored by git) and so won't be overwritten by future git pulls from the main repo.
+If you would like to override some of the functionality and styles or this
+child theme you may create a sub-directory named `overrides`.  This directory
+will be ignored by git and your changes won't be overwritten by future git pulls
+from the main repo.  Additionally, you can initialize this repository as a
+git-submodule and track your own changes in your own repo.
 
 ```
-  cd /wp-content/themes/quest-child
-  touch overrides.css
+  cd wp-content/themes/quest-child
+  mkdir overrides
+  touch overrides/style.css
+  echo "<?php //silence is golden" > overrides/functions.php
 ```
 
 
