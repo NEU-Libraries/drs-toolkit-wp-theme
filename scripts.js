@@ -5,4 +5,4 @@ jQuery(document).ready(function(){
   if (Modernizr.touch) {
     jQuery("#site-navigation .menu-item-has-children.dropdown").removeClass('menu-item-has-children').removeClass('dropdown');
   }
-})
+});

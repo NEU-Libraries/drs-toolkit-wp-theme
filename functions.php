@@ -30,12 +30,24 @@
 
 
   function theme_enqueue_styles() {
-     wp_register_script( 'header-helper', get_stylesheet_directory_uri() . '/header_helper.js', array( 'jquery' ));
-     wp_register_style('parent-style', get_template_directory_uri() . '/style.css');
-     wp_register_style('override-style', get_stylesheet_directory_uri() . '/overrides.css', array('quest-all-css', 'Quest-style'));
-     wp_enqueue_style( 'parent-style' );
-     wp_enqueue_style( 'override-style');
-     wp_enqueue_script( 'header-helper');
+    if (file_exists(dirname(__FILE__) . '/overrides/scripts.js')) {
+      wp_register_script('header-helper', get_stylesheet_directory_uri() . '/overrides/scripts.js', array( 'jquery' ));
+    } else {
+      wp_register_script('header-helper', get_stylesheet_directory_uri() . '/scripts.js', array( 'jquery' ));
+    }
+
+    wp_register_style('parent-style', get_template_directory_uri() . '/style.css');
+
+    // check for custom override styles
+    if (file_exists(dirname(__FILE__) . '/overrides/style.css')) {
+      wp_register_style('override-style', get_stylesheet_directory_uri() . '/overrides/style.css', array('quest-all-css', 'Quest-style'));
+    } elseif (file_exists(dirname(__FILE__) . '/overrides.css')) {
+      wp_register_style('override-style', get_stylesheet_directory_uri() . '/overrides.css', array('quest-all-css', 'Quest-style'));
+    }
+
+    wp_enqueue_style('parent-style');
+    wp_enqueue_style('override-style');
+    wp_enqueue_script('header-helper');
   }
   add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 
@@ -848,4 +860,9 @@ function quest_breadcrumb() {
   }
 
   echo "</ul>";
+}
+
+// custom functions.php file allowed in overrides folder
+if (file_exists(dirname(__FILE__) . '/overrides/functions.php')) {
+  require_once('overrides/functions.php');
 }
