@@ -327,4 +327,6 @@ display: none;
 }
 .assoc_files img{
   float:right;
+  padding-left:5px;
+  padding-bottom:5px;
 }
