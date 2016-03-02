@@ -39,7 +39,7 @@ See `footer.php` for where they exist.  For example, if you would like to change
 the first footer you would first `remove_action` and then `add_action` (your own):
 
 ```
-remove_action('add_first_footer', 'add_dsg_footer', 10);            // removes default
+remove_action('add_first_footer', 'add_custom_footer', 10);            // removes default
 add_action( 'add_first_footer', 'my_own_footer_function', 10, 0 );  // adds your own
 ```
 

@@ -24,7 +24,15 @@ $footer_container_cls = apply_filters( 'quest_footer_container_cls', 'container'
   </footer>
 <?php endif; ?>
 
-<?php do_action('add_first_footer'); ?>
+<div class="custom-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <?php do_action('add_first_footer'); ?>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer id="colophon" class="copyright quest-row" role="contentinfo">
   <div class="<?php echo $footer_container_cls; ?>">
