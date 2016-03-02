@@ -34,8 +34,17 @@ git-submodule and track your own changes in your own repo.
   echo "<?php //silence is golden" > overrides/functions.php
 ```
 
+You can also override some of the `actions` that are present in the custom footer.
+See `footer.php` for where they exist.  For example, if you would like to change
+the first footer you would first `remove_action` and then `add_action` (your own):
+
+```
+remove_action('add_first_footer', 'add_dsg_footer', 10);            // removes default
+add_action( 'add_first_footer', 'my_own_footer_function', 10, 0 );  // adds your own
+```
+
 
  [DRS Toolkit Plugin](https://github.com/NEU-Libraries/drs-toolkit-wordpress)
 
 
-If you would like breadcrumbs on single pages/posts (not drs items) that reflect hierarchy, simply drag and drop the pages in the wp-admin pages screen to nest. 
+If you would like breadcrumbs on single pages/posts (not drs items) that reflect hierarchy, simply drag and drop the pages in the wp-admin pages screen to nest.
