@@ -30,7 +30,7 @@ $footer_container_cls = apply_filters( 'quest_footer_container_cls', 'container'
   <div class="<?php echo $footer_container_cls; ?>">
     <div class="row">
       <div class="col-md-12 copyright-text">
-        <?php echo apply_filters( 'quest_footer_copyright_text', quest_get_footer_copyright() ); ?>
+        <?php do_action('add_second_footer'); ?>
       </div>
     </div>
     <!-- end row -->
