@@ -146,6 +146,7 @@
     $dsgfooter = '<div class="dsg-footer"><div class="container"><div class="row"><div class="col-sm-12"><p>This project was created using the <a href="http://dsg.neu.edu/drs-project-toolkit/" target="_blank">DRS Project Toolkit</a> with help from the <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a> at the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a>.</p></div></div></div></div>';
     echo $dsgfooter;
   }
+  add_action('add_first_footer', 'add_dsg_footer', 10, 0);
 
   /*overrides quest_page_title in template_tags to add custom DRSTK titles*/
   function quest_page_title() {
