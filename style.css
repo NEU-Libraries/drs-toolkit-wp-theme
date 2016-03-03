@@ -56,9 +56,10 @@
 .copyright-text address{
   padding-left:15px;
 }
-.dsg-footer p{
+.custom-footer p{
   padding:20px;
   margin:0px;
+  font-size: 13px;
 }
 
 /*for nu social media icons in footer */
@@ -125,6 +126,8 @@
 .drs-facet-val {
   display:block;
   overflow:auto;
+  border-bottom:1px dotted #eee;
+  padding: 5px 0px 5px 0px;
 }
 #content select#drs-per-page, #content select#drs-sort-option{
   width:auto;
@@ -169,10 +172,16 @@
     .modal-body { max-height: 600px; }
 }
 
+#drs_item_modal .modal-body{
+  max-height:100%;
+}
 
 /*fixes for pagination*/
 .pagination{
   margin-top:10px;
+}
+#drs_item_modal .pagination{
+  margin:0;
 }
 
 /*for tiled galleries*/
@@ -187,11 +196,21 @@
 }
 .info {
   padding: 15px;
+  text-align:left;
+  font-style: normal;
 }
 .brick img {
   margin: 0px;
   padding: 0px;
   display: block;
+  width: 100%;
+	max-width: 100%;
+  /*width: auto;
+max-width: 100%;
+position: relative;
+height: 100%;
+margin-left: auto;
+margin-right: auto;*/
 }
 .cell{
     background-position: top center;
@@ -199,7 +218,7 @@
     background-size: cover;
     position: absolute;
 }
-.cell .info {
+.cell .info, .brick-hover .info{
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.2s linear, opacity 0.2s linear;
@@ -211,19 +230,24 @@
   width: 100%;
   padding:0;
 }
-.cell:hover .info{
+.brick-hover .info{
+  top:0;
+  background:#FFF;
+  overflow:scroll;
+}
+.cell:hover .info, .brick-hover:hover .info{
   visibility: visible;
   opacity: .9;
   transition-delay: 0;
 }
-.cell .info > div {
+.cell .info > div{
   position: relative;
   top: 50%;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
 }
-.cell .info a{
+.cell .info a, .brick-hover .info a{
   display: block;
   padding: 15px;
 }
@@ -255,6 +279,7 @@
 }
 .drs-item .fa-folder-open-o{
   font-size:80px;
+  padding:45px;
 }
 figure, figcaption{
   text-align:center;
@@ -286,4 +311,33 @@ display: none;
 }
 .main-navigation .nav .dropdown-menu .dropdown-menu {
   margin-top: -1px !important;
+}
+
+.panel-body{
+  font-size:90%;
+}
+
+/*fis for no flash images on certain versions of ios*/
+.issuuembed .read-link img{left:0 !important;}
+
+#single_carousel .carousel-caption{
+  padding:10px;
+  display:none;
+}
+#single_carousel:hover .carousel-caption{
+  display:block;
+}
+
+
+/* for associated files display */
+.assoc_files{
+  margin-top:30px;
+}
+.assoc_files .panel-body{
+  font-size:90%;
+}
+.assoc_files img{
+  float:right;
+  padding-left:5px;
+  padding-bottom:5px;
 }

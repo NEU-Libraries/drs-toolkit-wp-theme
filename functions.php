@@ -8,8 +8,14 @@
   $quest_child_defaults['colors_galleries_caption_bg'] = '#FFF'; //'#f5f5f5';
   $quest_child_defaults['colors_footer_nulogo'] = 'nu-light';
   $quest_child_defaults['colors_header_nulogo'] = 'nu-light';
-  $quest_child_defaults['colors_global_button_bg'] = '#FFF';
-  $quest_child_defaults['colors_global_button_color'] = '#c00';
+  $quest_child_defaults['colors_global_button_bg'] = '#c00';
+  $quest_child_defaults['colors_global_button_color'] = '#FFF';
+  $quest_child_defaults['colors_panels_color'] = '#333';
+  $quest_child_defaults['colors_panels_bg_color'] = '#FFF';
+  $quest_child_defaults['colors_panels_border_color'] = '#ddd';
+  $quest_child_defaults['colors_panels_header_color'] = '#333';
+  $quest_child_defaults['colors_panels_header_bg_color'] = '#f5f5f5';
+  $quest_child_defaults['colors_sidebar_bg_color'] = '#FFF';
   $quest_child_defaults['choices'] = array();
   $quest_child_defaults['choices']['colors_footer_nulogo'] = array(
 			'nu-light'   => __( 'Northeastern Logo- light', 'quest' ),
@@ -23,17 +29,35 @@
   	);
 
 
-  add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
   function theme_enqueue_styles() {
-     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-     wp_enqueue_style( 'override-style', get_stylesheet_directory_uri() . '/overrides.css' );
+    if (file_exists(dirname(__FILE__) . '/overrides/scripts.js')) {
+      wp_register_script('header-helper', get_stylesheet_directory_uri() . '/overrides/scripts.js', array( 'jquery' ));
+    } else {
+      wp_register_script('header-helper', get_stylesheet_directory_uri() . '/scripts.js', array( 'jquery' ));
+    }
+
+    wp_register_style('parent-style', get_template_directory_uri() . '/style.css');
+
+    // check for custom override styles
+    if (file_exists(dirname(__FILE__) . '/overrides/style.css')) {
+      wp_register_style('override-style', get_stylesheet_directory_uri() . '/overrides/style.css', array('quest-all-css', 'Quest-style'));
+    } elseif (file_exists(dirname(__FILE__) . '/overrides.css')) {
+      wp_register_style('override-style', get_stylesheet_directory_uri() . '/overrides.css', array('quest-all-css', 'Quest-style'));
+    }
+
+    wp_enqueue_style('parent-style');
+    wp_enqueue_style('override-style');
+    wp_enqueue_script('header-helper');
   }
+  add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
+
 
   /*adds NU footer */
   function quest_get_footer_copyright(){
     $footer = '<div class="col-md-3"><a alt="Northeastern University" class="northeastern-logo" href="http://www.northeastern.edu"><span class="sr-only">Northeastern University</span></a></div><div class="col-md-6"><ul class="nav nav-pills"><li><a href="http://myneu.neu.edu/cp/home/displaylogin" target="_blank">myNEU</a></li><li><a href="https://prod-web.neu.edu/webapp6/employeelookup/public/main.action" target="_blank">Find Faculty &amp; Staff</a></li><li><a href="http://www.northeastern.edu/neuhome/adminlinks/findaz.html" target="_blank">Find A-Z</a></li><li><a href="http://www.northeastern.edu/emergency/index.html" target="_blank">Emergency Information</a></li><li><a href="http://www.northeastern.edu/search/index.html" target="_blank">Search</a></li></ul><address>360 Huntington Ave., Boston, Massachusetts 02115 · 617.373.2000 ·  TTY 617.373.3768<br><span class="fa fa-copyright"></span> '.date('Y').' Northeastern University</address></div><div class="col-md-3"><ul class="nu-social"><li><a class="youtube" href="https://www.youtube.com/northeastern" target="_blank"><span class="sr-only">Northern University on YouTube</span><span aria-hidden="" class="fa fa-youtube"></span></a></li><li><a class="twitter" href="http://twitter.com/northeastern" target="_blank"><span class="sr-only">Northern University on Twitter</span><span aria-hidden="" class="fa fa-twitter"></span></a></li><li><a class="facebook" href="http://www.facebook.com/northeastern" target="_blank"><span class="sr-only">Northeastern on Facebook</span><span aria-hidden="" class="fa fa-facebook"></span></a></li></ul></div>';
-    return $footer;
+    echo $footer;
   }
+  add_action('add_second_footer', 'quest_get_footer_copyright', 10, 0);
 
   /*disables comments on all attachment pages*/
   function filter_media_comment_status( $open, $post_id ) {
@@ -119,15 +143,17 @@
   }
 
   /*adds custom DSG footer*/
-  function add_dsg_footer(){
-    $dsgfooter = '<div class="dsg-footer"><div class="container"><div class="row"><div class="col-sm-12"><p>This project was created using the <a href="https://github.com/NEU-Libraries/drs-toolkit-wp-plugin" target="_blank">DRS Project Toolkit</a> with help from the <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a> at the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a>.</p></div></div></div></div>';
+  function add_custom_footer(){
+    $dsgfooter = '<p>This project was created using the <a href="http://dsg.neu.edu/drs-project-toolkit/" target="_blank">DRS Project Toolkit</a> with help from the <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a> at the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a>.</p>';
     echo $dsgfooter;
   }
+  add_action('add_first_footer', 'add_custom_footer', 10, 0);
 
   /*overrides quest_page_title in template_tags to add custom DRSTK titles*/
   function quest_page_title() {
     global $wp_query;
-    $template_type = $wp_query->query_vars['drstk_template_type'];
+    add_filter('query_vars', 'drstk_add_query_var');
+    $template_type = isset($wp_query->query_vars['drstk_template_type']) ? $wp_query->query_vars['drstk_template_type'] : "";
     $search_title = get_option('drstk_search_page_title') == '' ? 'Search' : get_option('drstk_search_page_title');
     $browse_title = get_option('drstk_browse_page_title') == '' ? 'Browse' : get_option('drstk_browse_page_title');
     $collections_title = get_option('drstk_collections_page_title') == '' ? 'Collections' : get_option('drstk_collections_page_title');
@@ -176,7 +202,12 @@
 
 		// Blog
     global $wp_query;
-    $template_type = $wp_query->query_vars['drstk_template_type'];
+    add_filter('query_vars', 'drstk_add_query_var');
+    if (isset($wp_query->query_vars['drstk_template_type'])){
+      $template_type = $wp_query->query_vars['drstk_template_type'];
+    } else {
+      $template_type = '';
+    }
 
     if ($template_type == 'search'){
       $view = 'search';
@@ -210,7 +241,7 @@
   /*adds NU LOGO to header */
   add_action( 'quest_before_header', 'nu_before_header', 10, 0 );
   function nu_before_header(){
-    echo "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'><a href='http://northeastern.edu' target='_blank' class='northeastern-logo'></a></div></div></div></header>";
+    echo "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'><a href='http://northeastern.edu' target='_blank' class='northeastern-logo'><span class='sr-only'>Northeastern University</span></a></a></div></div></div></header>";
   }
 
   /*adds customization colors for footer links, footer nu logo, and header nu logo*/
@@ -226,45 +257,41 @@
 			array(
 				'default'           => $quest_child_defaults[$setting_id],
 				'type'              => 'theme_mod',
-				'sanitize_callback' => 'quest_child_sanitize_choice'
+				'sanitize_callback' => 'maybe_hash_hex_color'
 			)
 		);
 
 		$wp_customize->add_control(
-			new WP_Customize_Control(
+			new WP_Customize_Color_Control(
 				$wp_customize,
 				$setting_id,
 				array(
 					'label'    => __( 'Button Background Color', 'quest' ),
 					'section'  => $section_id,
 					'settings' => $setting_id,
-					'type'     => 'select',
-					'choices'  => $quest_child_defaults['choices'][$setting_id]
 				)
 			)
 		);
 
     $setting_id = $section_id . '_button_color';
 
-		$wp_customize->add_setting(
+    $wp_customize->add_setting(
 			$setting_id,
 			array(
 				'default'           => $quest_child_defaults[$setting_id],
 				'type'              => 'theme_mod',
-				'sanitize_callback' => 'quest_child_sanitize_choice'
+				'sanitize_callback' => 'maybe_hash_hex_color'
 			)
 		);
 
 		$wp_customize->add_control(
-			new WP_Customize_Control(
+			new WP_Customize_Color_Control(
 				$wp_customize,
 				$setting_id,
 				array(
 					'label'    => __( 'Button Text and Border Color', 'quest' ),
 					'section'  => $section_id,
 					'settings' => $setting_id,
-					'type'     => 'select',
-					'choices'  => $quest_child_defaults['choices'][$setting_id]
 				)
 			)
 		);
@@ -414,7 +441,7 @@
     $wp_customize->add_section( $section_id,
 			array(
 				'title'      => __( 'Galleries', 'quest' ),
-				'priority'   => 35,
+				'priority'   => 36,
 				'capability' => 'edit_theme_options',
 				'panel'      => $panel_id
 			)
@@ -464,6 +491,166 @@
         )
       )
     );
+
+    $panel_id = 'colors';
+    $section_id = 'colors_panels';
+    $wp_customize->add_section( $section_id,
+			array(
+				'title'      => __( 'Panels', 'quest' ),
+				'priority'   => 36,
+				'capability' => 'edit_theme_options',
+				'panel'      => $panel_id
+			)
+		);
+
+    $setting_id = $section_id . '_color';
+
+    $wp_customize->add_setting(
+      $setting_id,
+      array(
+        'default'           => $quest_child_defaults[$setting_id],
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'maybe_hash_hex_color',
+      )
+    );
+
+    $wp_customize->add_control(
+      new WP_Customize_Color_Control(
+        $wp_customize,
+        $setting_id,
+        array(
+          'label'    => __( 'Text Color', 'quest' ),
+          'section'  => $section_id,
+          'settings' => $setting_id
+        )
+      )
+    );
+
+    $setting_id = $section_id . '_bg_color';
+
+    $wp_customize->add_setting(
+      $setting_id,
+      array(
+        'default'           => $quest_child_defaults[$setting_id],
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'maybe_hash_hex_color',
+      )
+    );
+
+    $wp_customize->add_control(
+      new WP_Customize_Color_Control(
+        $wp_customize,
+        $setting_id,
+        array(
+          'label'    => __( 'Background Color', 'quest' ),
+          'section'  => $section_id,
+          'settings' => $setting_id
+        )
+      )
+    );
+
+    $setting_id = $section_id . '_border_color';
+
+    $wp_customize->add_setting(
+      $setting_id,
+      array(
+        'default'           => $quest_child_defaults[$setting_id],
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'maybe_hash_hex_color',
+      )
+    );
+
+    $wp_customize->add_control(
+      new WP_Customize_Color_Control(
+        $wp_customize,
+        $setting_id,
+        array(
+          'label'    => __( 'Border Color', 'quest' ),
+          'section'  => $section_id,
+          'settings' => $setting_id
+        )
+      )
+    );
+
+    $setting_id = $section_id . '_header_color';
+
+    $wp_customize->add_setting(
+      $setting_id,
+      array(
+        'default'           => $quest_child_defaults[$setting_id],
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'maybe_hash_hex_color',
+      )
+    );
+
+    $wp_customize->add_control(
+      new WP_Customize_Color_Control(
+        $wp_customize,
+        $setting_id,
+        array(
+          'label'    => __( 'Header Text Color', 'quest' ),
+          'section'  => $section_id,
+          'settings' => $setting_id
+        )
+      )
+    );
+
+    $setting_id = $section_id . '_header_bg_color';
+
+    $wp_customize->add_setting(
+      $setting_id,
+      array(
+        'default'           => $quest_child_defaults[$setting_id],
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'maybe_hash_hex_color',
+      )
+    );
+
+    $wp_customize->add_control(
+      new WP_Customize_Color_Control(
+        $wp_customize,
+        $setting_id,
+        array(
+          'label'    => __( 'Header Background Color', 'quest' ),
+          'section'  => $section_id,
+          'settings' => $setting_id
+        )
+      )
+    );
+
+    $panel_id = 'colors';
+    $section_id = 'colors_sidebar';
+    $wp_customize->add_section( $section_id,
+			array(
+				'title'      => __( 'Sidebar', 'quest' ),
+				'priority'   => 36,
+				'capability' => 'edit_theme_options',
+				'panel'      => $panel_id
+			)
+		);
+
+    $setting_id = $section_id . '_bg_color';
+
+    $wp_customize->add_setting(
+      $setting_id,
+      array(
+        'default'           => $quest_child_defaults[$setting_id],
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'maybe_hash_hex_color',
+      )
+    );
+
+    $wp_customize->add_control(
+      new WP_Customize_Color_Control(
+        $wp_customize,
+        $setting_id,
+        array(
+          'label'    => __( 'Background Color', 'quest' ),
+          'section'  => $section_id,
+          'settings' => $setting_id
+        )
+      )
+    );
   }
 
 /* spits out css with custom variables */
@@ -474,18 +661,26 @@
     $footer_link_hover = get_theme_mod( 'colors_footer_link_hover', $quest_child_defaults['colors_footer_link_hover']);
     $gallery_bg_color = get_theme_mod( 'colors_galleries_caption_bg', $quest_child_defaults['colors_galleries_caption_bg']);
     $gallery_link_color = get_theme_mod( 'colors_galleries_link', $quest_child_defaults['colors_galleries_link']);
-    $dsg_footer_bg = get_theme_mod( 'colors_footer_dsg_bg', $quest_child_defaults['colors_footer_dsg_bg']);
-    $dsg_footer_color = get_theme_mod( 'colors_footer_dsg_color', $quest_child_defaults['colors_footer_dsg_color']);
+    $custom_footer_bg = get_theme_mod( 'colors_footer_dsg_bg', $quest_child_defaults['colors_footer_dsg_bg']);
+    $custom_footer_color = get_theme_mod( 'colors_footer_dsg_color', $quest_child_defaults['colors_footer_dsg_color']);
     $nulogo_footer_color = get_theme_mod( 'colors_footer_nulogo', $quest_child_defaults['colors_footer_nulogo']);
     $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
     if (strpos($nulogo_header_color, "lib") !== false){ $logo_height = ".nu-header .northeastern-logo{height:70px;}";} else {$logo_height = ".nu-header .northeastern-logo{height:50px;}";}
     $btn_color = get_theme_mod( 'colors_global_button_color', $quest_child_defaults['colors_global_button_color']);
+    $btn_bg_color = get_theme_mod( 'colors_global_button_bg', $quest_child_defaults['colors_global_button_bg']);
+    $panel_color = get_theme_mod( 'colors_panels_color', $quest_child_defaults['colors_panels_color']);
+    $panel_bg_color = get_theme_mod( 'colors_panels_bg_color', $quest_child_defaults['colors_panels_bg_color']);
+    $panel_border_color = get_theme_mod( 'colors_panels_border_color', $quest_child_defaults['colors_panels_border_color']);
+    $panel_header_color = get_theme_mod( 'colors_panels_header_color', $quest_child_defaults['colors_panels_header_color']);
+    $panel_header_bg_color = get_theme_mod( 'colors_panels_header_bg_color', $quest_child_defaults['colors_panels_header_bg_color']);
+    $sidebar_bg_color = get_theme_mod( 'colors_sidebar_bg_color', $quest_child_defaults['colors_sidebar_bg_color']);
     $link_color = quest_get_mod ('colors_global_accent', quest_get_default('colors_global_accent'));
     $footer_social_color = quest_get_mod( 'colors_footer_sc_si', quest_get_default('colors_footer_sc_si'));
     $footer_social_hover = quest_get_mod( 'colors_footer_sc_si_hover', quest_get_default('colors_footer_sc_si_hover'));
     $alt_color = quest_get_mod( 'colors_global_alt', quest_get_default('colors_global_alt'));
     $text_color = quest_get_mod( 'colors_global_text', quest_get_default('colors_global_text'));
-    echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .dsg-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .dsg-footer p a:hover{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.dsg-footer {background-color:'.$dsg_footer_bg.';color:'.$dsg_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'} footer .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/'.$nulogo_footer_color.'.svg);} .nu-header .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/'.$nulogo_header_color.'.svg);} '.$logo_height.'.btn{color:'.$btn_color.';}</style>';
+    $accent_color = quest_get_mod( 'colors_global_accent_shade', quest_get_default('colors_global_accent_shade'));
+    echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .custom-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.custom-footer {background-color:'.$custom_footer_bg.';color:'.$custom_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'} .drs-item .thumbnail figure .fa{ color:'.$text_color.'} footer .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/'.$nulogo_footer_color.'.svg);} .nu-header .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/'.$nulogo_header_color.'.svg);} '.$logo_height.'.btn, .button{color:'.$btn_color.';background-color:'.$btn_bg_color.' !important;border-color:'.$btn_color.';}.button:hover{box-shadow: 0 0 5px '.$btn_color.' !important;}.panel-default{border-radius:2px; border-color:'.$panel_border_color.' ; box-shadow:0 1px 1px rgba('.hex2rgb($panel_border_color).', .5);} .panel-default > .panel-body{color:'.$panel_color.';background-color:'.$panel_bg_color.'}.panel-default > .panel-heading{border-color:'.$panel_border_color.';color:'.$panel_header_color.';background-color:'.$panel_header_bg_color.'} #secondary{background-color:'.$sidebar_bg_color.'} .current-menu-item a{color:'.$accent_color.'}</style>';
   }
 
 
@@ -536,3 +731,140 @@
 			echo 'col-md-9';
 		}
 	}
+
+  add_filter( 'plugin_action_links', 'disable_plugin_deactivation', 10, 4 );
+  function disable_plugin_deactivation( $actions, $plugin_file, $plugin_data, $context ) {
+    // Remove edit and deactive link for drs-tk plugin
+    if ( array_key_exists( 'edit', $actions ) && in_array( $plugin_file, array( 'drs-tk/drs-tk.php'))) unset( $actions['edit'] );
+    if ( array_key_exists( 'deactivate', $actions ) && in_array( $plugin_file, array( 'drs-tk/drs-tk.php'))) unset( $actions['deactivate'] );
+    return $actions;
+   }
+
+ add_filter('relevanssi_pre_excerpt_content', 'remove_hidden_tags', 10, 3);
+ function remove_hidden_tags($content) {
+  $content = do_shortcode($content);
+  $content = preg_replace("/<div class=\"hidden\"[^>]*>(.*)<\/div>/", "", $content);
+  $content = preg_replace("/<div class=\'hidden\'>(.*?)<\/div>/s", "", $content);
+  $content = preg_replace('/<div class="hidden">(.*?)<\/div>/s', "", $content);
+  $content = preg_replace("/<br\/>/", " ", $content);
+  // write_log($content);
+  return $content;
+ }
+
+ if ( ! function_exists('write_log')) {
+  function write_log ( $log )  {
+     if ( is_array( $log ) || is_object( $log ) ) {
+        error_log( print_r( $log, true ) );
+     } else {
+        error_log( $log );
+     }
+  }
+}
+
+// remove core Menu Breadcrumb item markup filter
+remove_all_filters( 'menu_breadcrumb_item_markup' );
+
+// add my own Menu Breadcrumb item filter
+function my_menu_breadcrumb_item_markup( $markup, $breadcrumb ) {
+    // $markup is in the format of <a href="{Menu Item URL}">{Menu Item Title}</a>
+    // $breadcrumb is the Menu item object itself
+    return '<li>' . $markup . '</li>';
+}
+add_filter( 'menu_breadcrumb_item_markup', 'my_menu_breadcrumb_item_markup', 10, 2 );
+
+// overrides the default breadcrumb behavior -- this allows single pages/posts to have their menu placement reflect their breadcrumb path (not drs items)
+function quest_breadcrumb() {
+  global $post;
+
+  if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
+    woocommerce_breadcrumb( array(
+      'wrap_before' => '<ul class="breadcrumbs">',
+      'wrap_after'  => '</ul>',
+      'delimiter'   => '',
+      'before'      => '<li>',
+      'after'       => '</li>'
+    ) );
+
+    return;
+  }
+
+  if ( function_exists( 'is_bbpress' ) && is_bbpress() ) {
+    echo '<ul class="breadcrumbs">';
+    bbp_breadcrumb( array(
+      'delimiter' => '',
+      'before'    => '<li>',
+      'after'     => '</li>'
+    ) );
+    echo '</ul>';
+
+    return;
+  }
+
+
+  echo '<ul class="breadcrumbs">';
+
+  if ( ! is_front_page() ) {
+    echo '<li><a href="';
+    echo home_url();
+    echo '">' . __( 'Home', 'quest' );
+    echo "</a></li>";
+  }
+
+  if ( is_category() || is_single() && ! is_singular( 'portfolio' ) ) {
+    $category = get_the_category();
+    if ( isset( $category[0] ) ) {
+      $ID = $category[0]->cat_ID;
+      echo '<li>' . get_category_parents( $ID, true, '', false ) . '</li>';
+    }
+  }
+
+  if ( is_singular( 'portfolio' ) ) {
+    echo get_the_term_list( $post->ID, 'portfolio_category', '<li>', ' - ', '</li>' );
+  }
+  if ( is_home() ) {
+    echo '<li>' . get_option( 'blog_title', 'Blog' ) . '</li>';
+  }
+  if ( is_single() || is_page() ) {
+    //this is the only part modified from this function
+    $breadcrumb = array();
+  	// Get current page
+    $current = $post;
+
+  	// Check if current post has ancestors
+  	if($current->ancestors) {
+  		$ancestors = array_reverse($current->ancestors);
+
+  		// Step through ancestors array to build breadcrumb
+      if (count($ancestors > 0)){
+        foreach($ancestors as $i => $text){
+    			$breadcrumb[$i] = '<li><a href="' . get_page_link($text) . '" title="' . esc_attr(apply_filters('the_title', $text->post_title)) . '">'.get_the_title($text).'</a></li>';
+    		}
+      }
+  	}
+
+  	// Insert a link to the current page
+  	$breadcrumb[] = '<li><a href="' . get_page_link($current->ID) . '" title="' . esc_attr(apply_filters('the_title', $current->post_title)) . '">'.get_the_title($current).'</a></li>';
+
+  	// Display breacrumb with demarcator
+  	echo implode('', $breadcrumb);
+  }
+  if ( is_tag() ) {
+    echo '<li>' . "Tag: " . single_tag_title( '', false ) . '</li>';
+  }
+  if ( is_404() ) {
+    echo '<li>' . __( "404 - Page not Found", 'quest' ) . '</li>';
+  }
+  if ( is_search() ) {
+    echo '<li>' . __( "Search", 'quest' ) . '</li>';
+  }
+  if ( is_year() ) {
+    echo '<li>' . get_the_time( 'Y' ) . '</li>';
+  }
+
+  echo "</ul>";
+}
+
+// custom functions.php file allowed in overrides folder
+if (file_exists(dirname(__FILE__) . '/overrides/functions.php')) {
+  require_once('overrides/functions.php');
+}
