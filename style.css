@@ -317,7 +317,6 @@ display: none;
   display:block;
 }
 
-
 /* for associated files display */
 .assoc_files{
   margin-top:30px;
@@ -329,4 +328,9 @@ display: none;
   float:right;
   padding-left:5px;
   padding-bottom:5px;
+}
+
+/*hide issue embed links*/
+.issuu-isrendered span{
+  display:none !important;
 }
