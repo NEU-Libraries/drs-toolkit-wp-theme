@@ -139,7 +139,11 @@
   /*adds analytics*/
   add_action('wp_footer', 'add_google_analytics');
   function add_google_analytics(){
-    require_once( get_stylesheet_directory() . '/analytics.php' );
+    if (file_exists(dirname(__FILE__) . '/analytics.php')) {
+      require_once( get_stylesheet_directory() . '/analytics.php' );
+    } else {
+      echo "<script>function add_google_tracking(){ return; }</script>";
+    }
   }
 
   /*adds custom DSG footer*/
