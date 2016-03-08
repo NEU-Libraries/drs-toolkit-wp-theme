@@ -73,19 +73,20 @@
   /* adds toolkit main menu and assigns to primary*/
   add_action('switch_theme', 'drs_main_menu');
   function drs_main_menu() {
+    $home_func = (function_exists(drstk_home_url)) ? 'drstk_home_url' : 'home_url';
     $new_menu_id = wp_create_nav_menu('DRS Main Menu');
-  	$page_args_1 = array(
-      'menu-item-url' => site_url().'/search',
-  		'menu-item-title' => get_option('drstk_search_page_title') == '' ? 'Search' : get_option('drstk_search_page_title'),
-  		'menu-item-status' => 'publish',
-  	);
+    $page_args_1 = array(
+      'menu-item-url' => $home_func('/search/'),
+      'menu-item-title' => get_option('drstk_search_page_title') == '' ? 'Search' : get_option('drstk_search_page_title'),
+      'menu-item-status' => 'publish',
+    );
     $page_args_2 = array(
-      'menu-item-url' => site_url().'/browse',
+      'menu-item-url' => $home_func('/browse/'),
       'menu-item-title' => get_option('drstk_browse_page_title') == '' ? 'Browse' : get_option('drstk_browse_page_title'),
       'menu-item-status' => 'publish',
     );
     $page_args_3 = array(
-      'menu-item-url' => site_url().'/collections',
+      'menu-item-url' => $home_func('/collections/'),
       'menu-item-title' => get_option('drstk_collections_page_title') == '' ? 'Collections' : get_option('drstk_collections_page_title'),
       'menu-item-status' => 'publish',
     );
@@ -684,7 +685,7 @@
     $alt_color = quest_get_mod( 'colors_global_alt', quest_get_default('colors_global_alt'));
     $text_color = quest_get_mod( 'colors_global_text', quest_get_default('colors_global_text'));
     $accent_color = quest_get_mod( 'colors_global_accent_shade', quest_get_default('colors_global_accent_shade'));
-    echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .custom-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.custom-footer {background-color:'.$custom_footer_bg.';color:'.$custom_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'} .drs-item .thumbnail figure .fa{ color:'.$text_color.'} footer .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/'.$nulogo_footer_color.'.svg);} .nu-header .northeastern-logo{background-image: url('.site_url().'/wp-content/themes/quest-child/images/'.$nulogo_header_color.'.svg);} '.$logo_height.'.btn, .button{color:'.$btn_color.';background-color:'.$btn_bg_color.' !important;border-color:'.$btn_color.';}.button:hover{box-shadow: 0 0 5px '.$btn_color.' !important;}.panel-default{border-radius:2px; border-color:'.$panel_border_color.' ; box-shadow:0 1px 1px rgba('.hex2rgb($panel_border_color).', .5);} .panel-default > .panel-body{color:'.$panel_color.';background-color:'.$panel_bg_color.'}.panel-default > .panel-heading{border-color:'.$panel_border_color.';color:'.$panel_header_color.';background-color:'.$panel_header_bg_color.'} #secondary{background-color:'.$sidebar_bg_color.'} .current-menu-item a{color:'.$accent_color.'}</style>';
+    echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .custom-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.custom-footer {background-color:'.$custom_footer_bg.';color:'.$custom_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'} .drs-item .thumbnail figure .fa{ color:'.$text_color.'} footer .northeastern-logo{background-image: url('.get_stylesheet_directory_uri().'/images/'.$nulogo_footer_color.'.svg);} .nu-header .northeastern-logo{background-image: url('.get_stylesheet_directory_uri().'/images/'.$nulogo_header_color.'.svg);} '.$logo_height.'.btn, .button{color:'.$btn_color.';background-color:'.$btn_bg_color.' !important;border-color:'.$btn_color.';}.button:hover{box-shadow: 0 0 5px '.$btn_color.' !important;}.panel-default{border-radius:2px; border-color:'.$panel_border_color.' ; box-shadow:0 1px 1px rgba('.hex2rgb($panel_border_color).', .5);} .panel-default > .panel-body{color:'.$panel_color.';background-color:'.$panel_bg_color.'}.panel-default > .panel-heading{border-color:'.$panel_border_color.';color:'.$panel_header_color.';background-color:'.$panel_header_bg_color.'} #secondary{background-color:'.$sidebar_bg_color.'} .current-menu-item a{color:'.$accent_color.'}</style>';
   }
 
 
