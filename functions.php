@@ -73,19 +73,20 @@
   /* adds toolkit main menu and assigns to primary*/
   add_action('switch_theme', 'drs_main_menu');
   function drs_main_menu() {
+    $home_func = (function_exists(drstk_home_url)) ? 'drstk_home_url' : 'home_url';
     $new_menu_id = wp_create_nav_menu('DRS Main Menu');
     $page_args_1 = array(
-      'menu-item-url' => site_url().'/search',
+      'menu-item-url' => $home_func('/search/'),
       'menu-item-title' => get_option('drstk_search_page_title') == '' ? 'Search' : get_option('drstk_search_page_title'),
       'menu-item-status' => 'publish',
     );
     $page_args_2 = array(
-      'menu-item-url' => site_url().'/browse',
+      'menu-item-url' => $home_func('/browse/'),
       'menu-item-title' => get_option('drstk_browse_page_title') == '' ? 'Browse' : get_option('drstk_browse_page_title'),
       'menu-item-status' => 'publish',
     );
     $page_args_3 = array(
-      'menu-item-url' => site_url().'/collections',
+      'menu-item-url' => $home_func('/collections/'),
       'menu-item-title' => get_option('drstk_collections_page_title') == '' ? 'Collections' : get_option('drstk_collections_page_title'),
       'menu-item-status' => 'publish',
     );
