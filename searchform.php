@@ -5,9 +5,10 @@
  * @package Quest
  */
 
+$home_func = (function_exists(drstk_home_url)) ? 'drstk_home_url' : 'home_url';
 
 ?>
-<form class="search" action="<?php echo esc_url( home_url('/search/') ); ?>" method="get">
+<form class="search" action="<?php echo esc_url($home_func('/search/')); ?>" method="get">
   <fieldset>
     <legend class="sr-only">Search</legend>
     <div class="text">
