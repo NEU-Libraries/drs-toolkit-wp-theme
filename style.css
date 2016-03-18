@@ -348,3 +348,8 @@ display: none;
   width:inherit;
   position:relative;
 }
+
+/*for wp search content exceeding box*/
+.entry-content p{
+  word-wrap:break-word;
+}
