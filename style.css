@@ -189,7 +189,9 @@
   font-style: normal;
 }
 .drs-item.hover{
-  display:inline-block;
+  display:block;
+  position:absolute;
+  width:inherit;
 }
 .brick img {
   margin: 0px;
@@ -338,4 +340,8 @@ display: none;
 /*hide issue embed links*/
 .issuu-isrendered span{
   display:none !important;
+}
+
+.panel-grid-cell .textwidget{
+  width:inherit;
 }
