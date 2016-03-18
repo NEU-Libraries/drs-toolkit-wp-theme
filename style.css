@@ -183,10 +183,13 @@
   border-radius: 3px;
   border: none;
 }
-.info {
+.info, .drs-item.hover .drstk-caption[data-caption-position="hover"] {
   padding: 15px;
   text-align:left;
   font-style: normal;
+}
+.drs-item.hover{
+  display:inline-block;
 }
 .brick img {
   margin: 0px;
@@ -207,7 +210,7 @@ margin-right: auto;*/
     background-size: cover;
     position: absolute;
 }
-.cell .info, .brick-hover .info{
+.cell .info, .brick-hover .info, .drs-item.hover .drstk-caption[data-caption-position="hover"]{
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.2s linear, opacity 0.2s linear;
@@ -219,12 +222,12 @@ margin-right: auto;*/
   width: 100%;
   padding:0;
 }
-.brick-hover .info{
+.brick-hover .info, .drs-item.hover .drstk-caption[data-caption-position="hover"]{
   top:0;
   background:#FFF;
   overflow:scroll;
 }
-.cell:hover .info, .brick-hover:hover .info{
+.cell:hover .info, .brick-hover:hover .info, .drs-item.hover:hover .drstk-caption[data-caption-position="hover"]{
   visibility: visible;
   opacity: .9;
   transition-delay: 0;
@@ -236,7 +239,7 @@ margin-right: auto;*/
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
 }
-.cell .info a, .brick-hover .info a{
+.cell .info a, .brick-hover .info a, .drs-item.hover .drstk-caption[data-caption-position="hover"]{
   display: block;
   padding: 15px;
 }
