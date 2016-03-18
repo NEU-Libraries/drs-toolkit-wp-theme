@@ -248,6 +248,8 @@ margin-right: auto;*/
   right: 0;
   bottom: 0;
   padding:25px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .carousel-inner > .item > a > img {
   display:block;
