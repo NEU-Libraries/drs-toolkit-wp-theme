@@ -842,7 +842,7 @@ function quest_breadcrumb() {
   		// Step through ancestors array to build breadcrumb
       if (count($ancestors) > 0){
         foreach($ancestors as $i => $text){
-    			$breadcrumb[$i] = '<li><a href="' . get_page_link($text) . '" title="' . esc_attr(apply_filters('the_title', $text->post_title)) . '">'.get_the_title($text).'</a></li>';
+    			$breadcrumb[$i] = '<li><a href="' . get_page_link($text) . '" title="' . esc_attr(apply_filters('the_title', get_the_title($text))) . '">'.get_the_title($text).'</a></li>';
     		}
       }
   	}
