@@ -6,6 +6,7 @@
   $quest_child_defaults['colors_footer_dsg_color'] = 'rgb(212, 215, 217)';
   $quest_child_defaults['colors_galleries_link'] = '#c00';
   $quest_child_defaults['colors_galleries_caption_bg'] = '#FFF'; //'#f5f5f5';
+  $quest_child_defaults['layout_global_breadcrumb'] = 'yes';
   $quest_child_defaults['colors_footer_nulogo'] = 'nu-light';
   $quest_child_defaults['colors_header_nulogo'] = 'nu-light';
   $quest_child_defaults['colors_global_button_bg'] = '#c00';
@@ -27,6 +28,10 @@
       'nu-light'   => __( 'Northeastern Logo- light', 'quest' ),
   		'nu-dark' => __( 'Northeastern Logo- dark', 'quest' ),
   	);
+  $quest_child_defaults['choices']['layout_global_breadcrumb'] = array(
+      "yes" => __("Yes", "quest"),
+      "no" => __("No", "quest"),
+  );
 
 
   function theme_enqueue_styles() {
@@ -253,6 +258,32 @@
   add_action( 'customize_register', 'quest_child_customize_register' );
   function quest_child_customize_register($wp_customize) {
     global $quest_child_defaults;
+
+    $section_id = "layout_global";
+    $setting_id = $section_id . "_breadcrumb";
+
+    $wp_customize->add_setting(
+			$setting_id,
+			array(
+				'default'           => $quest_child_defaults[$setting_id],
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'quest_child_sanitize_choice'
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				$setting_id,
+				array(
+					'label'    => __( 'Show Breadcrumbs', 'quest' ),
+					'section'  => $section_id,
+					'settings' => $setting_id,
+					'type'     => 'select',
+					'choices'  => $quest_child_defaults['choices'][$setting_id]
+				)
+			)
+		);
 
     $section_id = 'colors_global';
     $setting_id = $section_id . '_button_bg';
@@ -685,7 +716,13 @@
     $alt_color = quest_get_mod( 'colors_global_alt', quest_get_default('colors_global_alt'));
     $text_color = quest_get_mod( 'colors_global_text', quest_get_default('colors_global_text'));
     $accent_color = quest_get_mod( 'colors_global_accent_shade', quest_get_default('colors_global_accent_shade'));
-    echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .custom-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.custom-footer {background-color:'.$custom_footer_bg.';color:'.$custom_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'} .drs-item .thumbnail figure .fa{ color:'.$text_color.'} footer .northeastern-logo{background-image: url('.get_stylesheet_directory_uri().'/images/'.$nulogo_footer_color.'.svg);} .nu-header .northeastern-logo{background-image: url('.get_stylesheet_directory_uri().'/images/'.$nulogo_header_color.'.svg);} '.$logo_height.'.btn, .button{color:'.$btn_color.';background-color:'.$btn_bg_color.' !important;border-color:'.$btn_color.';}.button:hover{box-shadow: 0 0 5px '.$btn_color.' !important;}.panel-default{border-radius:2px; border-color:'.$panel_border_color.' ; box-shadow:0 1px 1px rgba('.hex2rgb($panel_border_color).', .5);} .panel-default > .panel-body{color:'.$panel_color.';background-color:'.$panel_bg_color.'}.panel-default > .panel-heading{border-color:'.$panel_border_color.';color:'.$panel_header_color.';background-color:'.$panel_header_bg_color.'} #secondary{background-color:'.$sidebar_bg_color.'} .current-menu-item a{color:'.$accent_color.'}</style>';
+    $breadcrumbs = get_theme_mod( 'layout_global_breadcrumb', $quest_child_defaults['layout_global_breadcrumb']);
+    echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .custom-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-control{color:'.$link_color.'}.custom-footer {background-color:'.$custom_footer_bg.';color:'.$custom_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'} .drs-item .thumbnail figure .fa{ color:'.$text_color.'}';
+    echo ' footer .northeastern-logo{background-image: url('.get_stylesheet_directory_uri().'/images/'.$nulogo_footer_color.'.svg);} .nu-header .northeastern-logo{background-image: url('.get_stylesheet_directory_uri().'/images/'.$nulogo_header_color.'.svg);} '.$logo_height.'.btn, .button{color:'.$btn_color.';background-color:'.$btn_bg_color.' !important;border-color:'.$btn_color.';}.button:hover{box-shadow: 0 0 5px '.$btn_color.' !important;}.panel-default{border-radius:2px; border-color:'.$panel_border_color.' ; box-shadow:0 1px 1px rgba('.hex2rgb($panel_border_color).', .5);} .panel-default > .panel-body{color:'.$panel_color.';background-color:'.$panel_bg_color.'}';
+    if ($breadcrumbs == "no"){
+      echo 'ul.breadcrumbs{display:none;}';
+    }
+    echo '.panel-default > .panel-heading{border-color:'.$panel_border_color.';color:'.$panel_header_color.';background-color:'.$panel_header_bg_color.'} #secondary{background-color:'.$sidebar_bg_color.'} .current-menu-item a{color:'.$accent_color.'}</style>';
   }
 
 
