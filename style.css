@@ -205,6 +205,9 @@
   display:block;
   width:100%;
 }
+.panel-grid-cell .drs-item.hover img{
+  width:100%;
+}
 .drs-item.hover a{
   display:inline-block;
   width:100%;
