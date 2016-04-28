@@ -189,10 +189,20 @@
   font-style: normal;
   line-height: 150%;
 }
-.drs-item.hover{
-  display:block;
+.drs-item.hover .drstk-caption[data-caption-position="hover"]{
   position:absolute;
   width:inherit;
+}
+.drs-item.hover .drstk-caption[data-caption-position="hover"] a{
+  height:100%;
+  width:100%;
+}
+.drs-item.hover{
+  display:inline-block;
+  position:relative;
+}
+.drs-item.hover a{
+  display:inline-block;
 }
 .brick img {
   margin: 0px;
