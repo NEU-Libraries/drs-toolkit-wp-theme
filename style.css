@@ -203,9 +203,11 @@
 }
 .panel-grid-cell .drs-item.hover{
   display:block;
+  width:100%;
 }
 .drs-item.hover a{
   display:inline-block;
+  width:100%;
 }
 .brick img {
   margin: 0px;
