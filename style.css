@@ -201,6 +201,9 @@
   display:inline-block;
   position:relative;
 }
+.panel-grid-cell .drs-item.hover{
+  display:block;
+}
 .drs-item.hover a{
   display:inline-block;
 }
