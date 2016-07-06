@@ -263,6 +263,7 @@ margin-right: auto;*/
 .cell .info a, .brick-hover .info a, .drs-item.hover .drstk-caption[data-caption-position="hover"]{
   display: block;
   padding: 15px;
+  height: 100%;
 }
 
 /*for bootstrap carousel*/
@@ -370,4 +371,29 @@ display: none;
 /*for wp search content exceeding box*/
 .entry-content p{
   word-wrap:break-word;
+}
+
+.carousel-fade .carousel-inner .item {
+  transition-property: opacity;
+}
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0;
+}
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  transform: translate3d(0, 0, 0);
+}
+
+.carousel-fade .carousel-control {
+  z-index: 2;
 }
