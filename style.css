@@ -285,6 +285,9 @@ margin-right: auto;*/
   background-image:none;
   opacity:1;
 }
+.entry-content ol.carousel-indicators {
+  margin-bottom:-20px;
+}
 
 /*for single drs item*/
 .drs-item a:not(.button){
