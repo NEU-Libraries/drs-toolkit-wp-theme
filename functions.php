@@ -783,13 +783,12 @@
    }
 
  add_filter('relevanssi_pre_excerpt_content', 'remove_hidden_tags', 10, 3);
- function remove_hidden_tags($content) {
+ function remove_hidden_tags($content, $post, $query) {
   $content = do_shortcode($content);
   $content = preg_replace("/<div class=\"hidden\"[^>]*>(.*)<\/div>/", "", $content);
   $content = preg_replace("/<div class=\'hidden\'>(.*?)<\/div>/s", "", $content);
   $content = preg_replace('/<div class="hidden">(.*?)<\/div>/s', "", $content);
   $content = preg_replace("/<br\/>/", " ", $content);
-  // write_log($content);
   return $content;
  }
 
