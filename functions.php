@@ -100,7 +100,7 @@
 
     global $user_ID;
     $page['post_type']    = 'page';
-    $page['post_content'] = "<h3>People</h3><br/><h5>Project Staff</h5>Fill this in with staff members.<h5>Project Alumni</h5>Fill this in with project alumni.<br/><br/><h3>Credit and Copyright</h3><h5>Citing this project</h5>Put information here about how you would like others to cite your group.<h5>Copyright and licensing</h5>Fill in this section after talking to Northeastern's copyright officer. They will help you determine what to put in this section, depending on what rights you own to your content and your own wishes on what people can do with your content.<br/><h3>DRS Project Toolkit</h3>This project was created on a customized WordPress instance using the <a href='http://dsg.neu.edu/wiki/DSG_DRS_Project_Toolkit' target='_blank'>DRS Project Toolkit</a>. These tools, as well as archival, hosting, and support systems, are provided by the Northeastern University Library Digital Scholarship group. The DSG specializes in the Digital Humanities and helps faculty, staff, and students in the Northeastern community showcase their projects to the public.";
+    $page['post_content'] = "<h3>People</h3><br/><h5>Project Staff</h5>Fill this in with staff members.<h5>Project Alumni</h5>Fill this in with project alumni.<br/><br/><h3>Credit and Copyright</h3><h5>Citing this project</h5>Put information here about how you would like others to cite your group.<h5>Copyright and licensing</h5>Fill in this section after talking to Northeastern's copyright officer. They will help you determine what to put in this section, depending on what rights you own to your content and your own wishes on what people can do with your content.<br/><h3>CERES: Exhibit Toolkit</h3>This project was created on a customized WordPress instance using the <a href='http://dsg.neu.edu/wiki/DSG_DRS_Project_Toolkit' target='_blank'>CERES: Exhibit Toolkit</a>. These tools, as well as archival, hosting, and support systems, are provided by the Northeastern University Library Digital Scholarship group. The DSG specializes in the Digital Humanities and helps faculty, staff, and students in the Northeastern community showcase their projects to the public.";
     $page['post_parent']  = 0;
     $page['post_author']  = $user_ID;
     $page['post_status']  = 'publish';
@@ -154,7 +154,7 @@
 
   /*adds custom DSG footer*/
   function add_custom_footer(){
-    $dsgfooter = '<p>This project was created using the <a href="http://dsg.neu.edu/drs-project-toolkit/" target="_blank">DRS Project Toolkit</a> with help from the <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a> at the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a>.</p>';
+    $dsgfooter = '<p>This project was created using the <a href="http://dsg.neu.edu/drs-project-toolkit/" target="_blank">CERES: Exhibit Toolkit</a> with help from the <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a> at the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a>.</p>';
     echo $dsgfooter;
   }
   add_action('add_first_footer', 'add_custom_footer', 10, 0);

@@ -1,4 +1,4 @@
-This is the customized child theme for wordpress installs with the DRS Toolkit plugin. It is recommended that it is cloned inside the wp-content/themes directory with the name quest-child.
+This is the customized child theme for wordpress installs with the CERES: Exhibit Toolkit plugin. It is recommended that it is cloned inside the wp-content/themes directory with the name quest-child.
 
 ```
 git clone https://github.com/NEU-Libraries/drs-toolkit-wp-theme.git quest-child
@@ -44,7 +44,7 @@ add_action( 'add_first_footer', 'my_own_footer_function', 10, 0 );  // adds your
 ```
 
 
- [DRS Toolkit Plugin](https://github.com/NEU-Libraries/drs-toolkit-wordpress)
+ [CERES: Exhibit Toolkit Plugin](https://github.com/NEU-Libraries/drs-toolkit-wordpress)
 
 
 If you would like breadcrumbs on single pages/posts (not drs items) that reflect hierarchy, simply drag and drop the pages in the wp-admin pages screen to nest.
