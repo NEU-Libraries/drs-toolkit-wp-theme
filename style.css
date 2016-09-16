@@ -321,6 +321,7 @@ display: none;
 .drs-field-value{
   padding-left:5px;
   font-weight:normal;
+  word-break: break-word;
 }
 
 /*fixes for ugly dropdown menus*/
