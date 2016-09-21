@@ -43,7 +43,7 @@ $view = quest_get_view();
 
 	<div class="entry-content">
 		<?php the_excerpt(); ?>
-		<a href="<?php the_permalink(' ') ?>" class="post-entry-read-more small" title="<?php the_title(); ?>">Read More <i class="fa fa-angle-double-right"></i></a>
+		<a href="<?php the_permalink(); ?>" class="post-entry-read-more small" title="<?php the_title(); ?>">Read More <i class="fa fa-angle-double-right"></i></a>
 	</div>
 	<!-- .entry-content -->
 </article><!-- #post-## -->
