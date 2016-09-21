@@ -29,7 +29,7 @@ $view = quest_get_view();
 		<?php endif; ?>
 
 		<?php do_action('quest_single_' . $view . '_after_ft_img'); ?>
-		<h4 class="post-title entry-title"><a href="<?php esc_url(get_permalink()); ?>" rel="bookmark">
+		<h4 class="post-title entry-title"><a href="<?php esc_url(the_permalink()); ?>" rel="bookmark">
 		<?php the_title(); ?>
 	</a></h4>
 		<?php if ( 'post' == get_post_type() ) : ?>
