@@ -312,6 +312,10 @@ figcaption .label{
 .home #content .entry-title:first-of-type {
 display: none;
 }
+.home #content .related_content .entry-title {
+  display:block;
+  margin-top:0;
+}
 .drs-item-details b, .drs-field-label, .drs-field-label b{
   font-weight:bold;
 }
