@@ -29,9 +29,9 @@ $view = quest_get_view();
 		<?php endif; ?>
 
 		<?php do_action('quest_single_' . $view . '_after_ft_img'); ?>
-		<h3 class="post-title entry-title"><a href="<?php esc_url(get_permalink()); ?>" rel="bookmark">
+		<h4 class="post-title entry-title"><a href="<?php esc_url(get_permalink()); ?>" rel="bookmark">
 		<?php the_title(); ?>
-		</a></h3>
+	</a></h4>
 		<?php if ( 'post' == get_post_type() ) : ?>
 			<div class="entry-meta">
 				<?php quest_post_meta(); ?>
