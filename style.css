@@ -309,7 +309,7 @@ figcaption .label{
 .drs-item figure a{
   text-decoration: none;
 }
-.home #content .entry-title {
+.home #content .entry-title:first-of-type {
 display: none;
 }
 .drs-item-details b, .drs-field-label, .drs-field-label b{
