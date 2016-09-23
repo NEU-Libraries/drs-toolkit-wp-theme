@@ -782,16 +782,6 @@
     return $actions;
    }
 
- add_filter('relevanssi_pre_excerpt_content', 'remove_hidden_tags', 10, 3);
- function remove_hidden_tags($content, $post, $query) {
-  $content = do_shortcode($content);
-  $content = preg_replace("/<div class=\"hidden\"[^>]*>(.*)<\/div>/", "", $content);
-  $content = preg_replace("/<div class=\'hidden\'>(.*?)<\/div>/s", "", $content);
-  $content = preg_replace('/<div class="hidden">(.*?)<\/div>/s', "", $content);
-  $content = preg_replace("/<br\/>/", " ", $content);
-  return $content;
- }
-
  if ( ! function_exists('write_log')) {
   function write_log ( $log )  {
      if ( is_array( $log ) || is_object( $log ) ) {
@@ -908,6 +898,16 @@ function quest_breadcrumb() {
 // custom functions.php file allowed in overrides folder
 if (file_exists(dirname(__FILE__) . '/overrides/functions.php')) {
   require_once('overrides/functions.php');
+}
+
+add_filter('relevanssi_pre_excerpt_content', 'remove_hidden_tags', 10, 3);
+function remove_hidden_tags($content, $post, $query) {
+ $content = do_shortcode($content);
+ $content = preg_replace("/<div class=\"hidden\"[^>]*>(.*)<\/div>/", "", $content);
+ $content = preg_replace("/<div class=\'hidden\'>(.*?)<\/div>/s", "", $content);
+ $content = preg_replace('/<div class="hidden">(.*?)<\/div>/s', "", $content);
+ $content = preg_replace("/<br\/>/", " ", $content);
+ return $content;
 }
 
 add_filter('relevanssi_pre_excerpt_content', 'rlv_remove_shortcodes');
