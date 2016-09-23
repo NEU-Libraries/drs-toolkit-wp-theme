@@ -909,3 +909,9 @@ function quest_breadcrumb() {
 if (file_exists(dirname(__FILE__) . '/overrides/functions.php')) {
   require_once('overrides/functions.php');
 }
+
+add_filter('relevanssi_pre_excerpt_content', 'rlv_remove_shortcodes');
+function rlv_remove_shortcodes($content) {
+    $content = preg_replace('/\[drstk_.*?\]/', '', $content);
+    return $content;
+}
