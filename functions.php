@@ -900,14 +900,23 @@ if (file_exists(dirname(__FILE__) . '/overrides/functions.php')) {
   require_once('overrides/functions.php');
 }
 
-add_filter('relevanssi_excerpt_content', 'remove_hidden_info', 10, 3);
-function remove_hidden_info($content, $post, $query){
-  write_log("before");
-  write_log($content);
+add_filter('relevanssi_pre_excerpt_content', 'remove_hidden_tags', 10, 3);
+function remove_hidden_tags($content, $post, $query) {
+ $content = do_shortcode($content);
+ $content = preg_replace("/<div class=\"hidden\"[^>]*>(.*)<\/div>/", "", $content);
+ $content = preg_replace("/<div class=\'hidden\'>(.*?)<\/div>/s", "", $content);
+ $content = preg_replace('/<div class="hidden">(.*?)<\/div>/s', "", $content);
+ $content = preg_replace("/<br\/>/", " ", $content);
+ return $content;
+}
+
+add_filter('relevanssi_excerpt_content', 'debug_hidden_tags', 10, 3);
+function debug_hidden_tags($content, $post, $query){
+  write_log("in excerpt_content after pre");
   $content = preg_replace("/<div class=\"hidden\"[^>]*>(.*)<\/div>/", "", $content);
   $content = preg_replace("/<div class=\'hidden\'>(.*?)<\/div>/s", "", $content);
   $content = preg_replace('/<div class="hidden">(.*?)<\/div>/s', "", $content);
   $content = preg_replace("/<br\/>/", " ", $content);
-  write_log("after");
   write_log($content);
+  return $content;
 }

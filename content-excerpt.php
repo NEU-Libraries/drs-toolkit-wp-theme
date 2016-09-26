@@ -42,7 +42,7 @@ $view = quest_get_view();
 	<!-- .entry-header -->
 
 	<div class="entry-content">
-		<?php echo relevanssi_do_excerpt($post, $query_string); ?>
+		<?php the_excerpt(); ?>
 		<a href="<?php the_permalink(); ?>" class="post-entry-read-more small" title="<?php the_title(); ?>">Read More <i class="fa fa-angle-double-right"></i></a>
 	</div>
 	<!-- .entry-content -->
