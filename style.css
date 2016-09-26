@@ -312,7 +312,7 @@ figcaption .label{
 .home #content .entry-title:first-of-type {
 display: none;
 }
-.home #content .related_content .entry-title {
+.home #content .related_content .entry-title, .home #content #secondary .entry-title  {
   display:block;
   margin-top:0;
 }
