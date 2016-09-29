@@ -900,26 +900,18 @@ if (file_exists(dirname(__FILE__) . '/overrides/functions.php')) {
   require_once('overrides/functions.php');
 }
 
-add_filter('relevanssi_excerpt_content', 'remove_hidden_content', 10, 3);
-function remove_hidden_content($content, $post, $query){
-  $content = do_shortcode($content);
-  $content = preg_replace("/<div class=\"hidden\"[^>]*>(.*)<\/div>/", "", $content);
-  $content = preg_replace("/<div class=\'hidden\'>(.*?)<\/div>/s", "", $content);
-  $content = preg_replace('/<div class="hidden">(.*?)<\/div>/s', "", $content);
-  $content = preg_replace("/<br\/>/", " ", $content);
+/* for item appears in */
+add_filter('relevanssi_pre_excerpt_content', 'remove_shortcodes', 10, 3);
+function remove_shortcodes($content, $post, $query){
+  $content = preg_replace("/\[(.*)\]/", " ", $content);
   return $content;
 }
 
-function drstk_trim_excerpt( $text='' ){
-  $text = apply_filters('the_content', $text);
-  $text = do_shortcode($text);
-  $text = preg_replace("/<div class=\"hidden\"[^>]*>(.*)<\/div>/", "", $text);
-  $text = preg_replace("/<div class=\'hidden\'>(.*?)<\/div>/s", "", $text);
-  $text = preg_replace('/<div class="hidden">(.*?)<\/div>/s', "", $text);
-  $text = preg_replace("/<br\/>/", " ", $text);
-  $text = str_replace(']]>', ']]&gt;', $text);
-  $excerpt_length = apply_filters('excerpt_length', 55);
-  $excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
-  return wp_trim_words( $text, $excerpt_length, $excerpt_more );
+/*for search results - strip shortcodes */
+add_filter( 'the_content', 'remove_shortcodes_filter', 10 );
+function remove_shortcodes_filter( $content ) {
+  if (is_search()){
+    $content = preg_replace("/\[(.*)\]/", " ", $content);
+  }
+  return $content;
 }
-add_filter('wp_trim_excerpt', 'drstk_trim_excerpt');
