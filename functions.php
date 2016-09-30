@@ -903,7 +903,7 @@ if (file_exists(dirname(__FILE__) . '/overrides/functions.php')) {
 /* for item appears in */
 add_filter('relevanssi_pre_excerpt_content', 'remove_shortcodes', 10, 3);
 function remove_shortcodes($content, $post, $query){
-  $content = preg_replace("/\[(.*)\]/", " ", $content);
+  $content = preg_replace("/\[[^\]]*\]/", " ", $content);
   return $content;
 }
 
@@ -911,7 +911,7 @@ function remove_shortcodes($content, $post, $query){
 add_filter( 'the_content', 'remove_shortcodes_filter', 10 );
 function remove_shortcodes_filter( $content ) {
   if (is_search()){
-    $content = preg_replace("/\[(.*)\]/", " ", $content);
+    $content = preg_replace("/\[[^\]]*\]/", " ", $content);
   }
   return $content;
 }
