@@ -285,7 +285,7 @@ margin-right: auto;*/
   background-image:none;
   opacity:1;
 }
-.entry-content ol.carousel-indicators {
+ol.carousel-indicators {
   margin-bottom:-20px;
 }
 
@@ -326,6 +326,9 @@ display: none;
   padding-left:5px;
   font-weight:normal;
   word-break: break-word;
+}
+.drs-item-custom{
+  padding-top: 30px;
 }
 
 /*fixes for ugly dropdown menus*/
