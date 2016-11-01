@@ -3,3 +3,5 @@ overrides.css
 .DS_Store
 .gitmodules
 overrides/
+overrides.js
+footer-additions.php

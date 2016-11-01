@@ -52,5 +52,6 @@ $footer_container_cls = apply_filters( 'quest_footer_container_cls', 'container'
 
 <a href="#0" class="cd-top" title="Back to top"><i class="fa fa-angle-up"></i><span class="sr-only">Back to top</span></a>
 
+<?php get_footer('additions'); ?>
 </body>
 </html>
