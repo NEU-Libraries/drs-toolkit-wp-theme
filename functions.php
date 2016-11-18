@@ -314,7 +314,14 @@
   /*adds NU LOGO to header */
   add_action( 'quest_before_header', 'nu_before_header', 10, 0 );
   function nu_before_header(){
-    echo "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'><a href='http://northeastern.edu' target='_blank' class='northeastern-logo'><span class='sr-only'>Northeastern University</span></a></a></div></div></div></header>";
+    $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
+    echo "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'><a href='";
+    if (strpos($nulogo_header_color, 'lib') !== false){
+      echo "http://library.northeastern.edu";
+    } else {
+      echo "http://northeastern.edu";
+    }
+    echo "' target='_blank' class='northeastern-logo'><span class='sr-only'>Northeastern University</span></a></a></div></div></div></header>";
   }
 
   /*adds customization colors for footer links, footer nu logo, and header nu logo*/
