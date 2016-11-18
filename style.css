@@ -285,7 +285,7 @@ margin-right: auto;*/
   background-image:none;
   opacity:1;
 }
-ol.carousel-indicators {
+ol.carousel-indicators, .entry-content ol.carousel-indicators {
   margin-bottom:-20px;
 }
 
