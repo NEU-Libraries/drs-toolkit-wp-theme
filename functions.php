@@ -314,6 +314,7 @@
   /*adds NU LOGO to header */
   add_action( 'quest_before_header', 'nu_before_header', 10, 0 );
   function nu_before_header(){
+    global $quest_child_defaults;
     $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
     echo "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'><a href='";
     if (strpos($nulogo_header_color, 'lib') !== false){
