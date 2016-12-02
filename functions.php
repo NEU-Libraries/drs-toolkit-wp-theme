@@ -231,6 +231,7 @@
     $browse_title = get_option('drstk_browse_page_title') == '' ? 'Browse' : get_option('drstk_browse_page_title');
     $collections_title = get_option('drstk_collections_page_title') == '' ? 'Collections' : get_option('drstk_collections_page_title');
     $collection_title = get_option('drstk_collection_page_title') == '' ? 'Browse' : get_option('drstk_collection_page_title');
+    $mirador_title = get_option('drstk_mirador_page_title') == '' ? 'Book View' : get_option('drstk_mirador_page_title');
 
     if ($template_type == 'search'){
       printf( __($search_title, 'quest'));
@@ -242,6 +243,8 @@
       printf( __($collection_title, 'quest'));
     } elseif ($template_type == 'item'){
       return;
+    } elseif ($template_type == 'mirador'){
+      printf( __($mirador_title, 'quest'));
     } else if ( ( function_exists( 'is_woocommerce' ) && is_woocommerce() && is_product() ) || ( function_exists( 'is_bbpress' ) && is_bbpress() ) ) {
       the_title();
     } else if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
