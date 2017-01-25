@@ -105,6 +105,8 @@
     wp_register_script('header-helper', get_stylesheet_directory_uri() . '/scripts.js', array( 'jquery' ));
     wp_register_style('parent-style', get_template_directory_uri() . '/style.css');
 
+    wp_enqueue_style('parent-style');
+
     // check for custom override styles
     if (file_exists(dirname(__FILE__) . '/overrides/style.css')) {
       wp_register_style('override-style', get_stylesheet_directory_uri() . '/overrides/style.css', array('quest-all-css', 'Quest-style'));
@@ -114,7 +116,6 @@
       wp_enqueue_style('override-style');
     }
 
-    wp_enqueue_style('parent-style');
     wp_enqueue_script('header-helper', array('jquery'));
   }
   add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
