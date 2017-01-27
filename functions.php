@@ -95,6 +95,14 @@
   add_action( 'wp_enqueue_scripts', 'quest_scripts' );
 
   function theme_enqueue_styles() {
+
+    // quest-child css and scripts should load before the overrides css and js
+    wp_register_script('header-helper', get_stylesheet_directory_uri() . '/scripts.js', array( 'jquery' ));
+    wp_register_style('parent-style', get_template_directory_uri() . '/style.css');
+    wp_enqueue_style('parent-style');
+    wp_enqueue_script('header-helper', array('jquery'));
+
+    // check for custom override javascript
     if (file_exists(dirname(__FILE__) . '/overrides/scripts.js')) {
       wp_register_script('override-js', get_stylesheet_directory_uri() . '/overrides/scripts.js', array( 'jquery' ));
       wp_enqueue_script('override-js', array('jquery'));
@@ -102,10 +110,6 @@
       wp_register_script('override-js', get_stylesheet_directory_uri() . '/overrides.js', array( 'jquery' ));
       wp_enqueue_script('override-js', array('jquery'));
     }
-    wp_register_script('header-helper', get_stylesheet_directory_uri() . '/scripts.js', array( 'jquery' ));
-    wp_register_style('parent-style', get_template_directory_uri() . '/style.css');
-
-    wp_enqueue_style('parent-style');
 
     // check for custom override styles
     if (file_exists(dirname(__FILE__) . '/overrides/style.css')) {
@@ -116,7 +120,6 @@
       wp_enqueue_style('override-style');
     }
 
-    wp_enqueue_script('header-helper', array('jquery'));
   }
   add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 
