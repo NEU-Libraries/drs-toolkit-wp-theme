@@ -1001,3 +1001,20 @@ function drstk_add_admin_css(){
   }
 }
 add_action('admin_enqueue_scripts', 'drstk_add_admin_css', 20);
+
+function drstk_remove_core_updates(){
+  global $wp_version;
+  
+  $updateObject = (object) array(
+      'last_checked'=> time(),
+      'version_checked'=> $wp_version,
+      'locale' => 'en-US',
+      'current' => '',
+      'updates' => array(),
+      
+  );
+  return $updateObject;
+}
+add_filter('pre_site_transient_update_core','drstk_remove_core_updates');
+//add_filter('pre_site_transient_update_plugins','drstk_remove_core_updates');
+//add_filter('pre_site_transient_update_themes','drstk_remove_core_updates');
