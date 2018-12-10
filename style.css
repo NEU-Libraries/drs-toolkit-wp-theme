@@ -97,11 +97,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.browse h6.etd-advisor, .browse h6.etd-committee-member {
-    display: inline;
-}
-
 .drs-facet-name{
   display:block;
 }
@@ -419,4 +414,8 @@ display: none;
   height: 100%;
   position: relative;
   min-height: 650px;
+}
+
+ul.dropdown-menu.sm-nowrap {
+	max-width: 1000px !important;
 }

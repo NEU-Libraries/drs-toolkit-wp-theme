@@ -84,7 +84,7 @@
 			wp_dequeue_script('quest-all-js');
 			
 			// Enqueue required scripts
-			wp_enqueue_script( 'quest-child-all-js', get_stylesheet_directory_uri() . '/assets/js/quest-and-plugins.js', array(
+			wp_enqueue_script( 'quest-all-js', get_template_directory_uri() . '/assets/js/quest-and-plugins.js', array(
 				'jquery',
 				'masonry'
 			) );
