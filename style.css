@@ -419,3 +419,10 @@ display: none;
 ul.dropdown-menu.sm-nowrap {
 	max-width: 1000px !important;
 }
+
+/* adjust positioning for updated longer footer */
+
+.copyright ul {
+	float: none !important;
+	
+}
