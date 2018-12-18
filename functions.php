@@ -210,13 +210,6 @@
     }
   }
 
-  /*adds custom DSG footer*/
-  function add_custom_footer(){
-    $dsgfooter = '<p>This project was created using the <a href="http://dsg.neu.edu/drs-project-toolkit/" target="_blank">CERES: Exhibit Toolkit</a> with help from the <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a> at the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a>.</p>';
-    echo $dsgfooter;
-  }
-  add_action('add_first_footer', 'add_custom_footer', 10, 0);
-
   /*overrides quest_page_title in template_tags to add custom DRSTK titles*/
   function quest_page_title() {
     global $wp_query;

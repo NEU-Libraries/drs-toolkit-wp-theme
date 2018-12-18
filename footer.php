@@ -28,7 +28,11 @@ $footer_container_cls = apply_filters( 'quest_footer_container_cls', 'container'
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <?php do_action('add_first_footer'); ?>
+        <p>This project was created using the 
+          <a href="http://dsg.neu.edu/drs-project-toolkit/" target="_blank">CERES: Exhibit Toolkit</a>
+          with help from the <a href="http://dsg.neu.edu" target="_blank">Digital Scholarship Group</a> 
+          at the <a href="http://library.northeastern.edu" target="_blank">Northeastern University Library</a>.
+        </p>
       </div>
     </div>
   </div>
