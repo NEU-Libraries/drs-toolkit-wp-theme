@@ -64,13 +64,13 @@ $footer_container_cls = apply_filters( 'quest_footer_container_cls', 'container'
           <ul class="nu-social">
             <li>
               <a class="youtube" href="https://www.youtube.com/northeastern" target="_blank">
-                <span class="sr-only">Northern University on YouTube</span>
+                <span class="sr-only">Northeastern University on YouTube</span>
                 <span aria-hidden="" class="fa fa-youtube"></span>
               </a>
             </li>
             <li>
               <a class="twitter" href="http://twitter.com/northeastern" target="_blank">
-                <span class="sr-only">Northern University on Twitter</span>
+                <span class="sr-only">Northeastern University on Twitter</span>
                 <span aria-hidden="" class="fa fa-twitter"></span>
               </a>
             </li>
