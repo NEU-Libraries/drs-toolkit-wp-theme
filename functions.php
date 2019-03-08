@@ -210,6 +210,12 @@
     }
   }
 
+  /* Override for ETD to hide useless distinction between search and browse */
+  function quest_title_bar( $view ) {
+    
+  }
+  
+  
   /*overrides quest_page_title in template_tags to add custom DRSTK titles*/
   function quest_page_title() {
     global $wp_query;
