@@ -212,7 +212,7 @@
 
   /* Override for ETD to hide useless distinction between search and browse */
   function quest_title_bar( $view ) {
-    echo "<div id='title-container'></div>";
+    echo "<div id='title-container' style='padding: 0px;'></div>";
   }
   
   
