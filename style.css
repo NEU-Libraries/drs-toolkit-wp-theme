@@ -424,3 +424,9 @@ ul.dropdown-menu.sm-nowrap {
 	float: none !important;
 	
 }
+
+/* for ETD */
+
+p.embargoed {
+  color: #ff4136;
+}
