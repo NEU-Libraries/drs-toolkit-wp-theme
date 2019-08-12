@@ -23,11 +23,11 @@
 			'nu-dark' => __( 'Northeastern Logo- dark', 'quest' )
 		);
   $quest_child_defaults['choices']['colors_header_nulogo'] = array(
-  		'lib-light'   => __( 'Library Logo- light', 'quest' ),
-  		'lib-dark' => __( 'Library Logo-dark', 'quest' ),
-      'nu-light'   => __( 'Northeastern Logo- light', 'quest' ),
-  		'nu-dark' => __( 'Northeastern Logo- dark', 'quest' ),
-      'nu-library-white' => __( 'Northeaster Library- latest'),
+  		'lib-light.svg'   => __( 'Library Logo- light', 'quest' ),
+  		'lib-dark.svg' => __( 'Library Logo-dark', 'quest' ),
+      'nu-light.svg'   => __( 'Northeastern Logo- light', 'quest' ),
+  		'nu-dark.svg' => __( 'Northeastern Logo- dark', 'quest' ),
+      'nu_library_white.png' => __( 'Northeastern Library- latest', 'quest'),
   	);
   $quest_child_defaults['choices']['layout_global_breadcrumb'] = array(
       "yes" => __("Yes", "quest"),
@@ -771,10 +771,23 @@
     $nulogo_footer_color = get_theme_mod( 'colors_footer_nulogo', $quest_child_defaults['colors_footer_nulogo']);
     $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
     
-    if (strpos($nulogo_header_color, "lib") !== false) {
-        $logo_height_css = ".nu-header .northeastern-logo{height:70px;}";
-    } else {
-        $logo_height_css = ".nu-header .northeastern-logo{height:50px;}";
+    
+    error_log($nulogo_header_color);
+    switch ($nulogo_header_color) {
+      case 'lib-dark.svg':
+      case 'lib-light.svg':
+        $logo_height_css = ".nu-header .northeastern-logo { height:70px; }";
+        break;
+      case 'nu-dark.svg':
+      case 'nu-light.svg':
+        $logo_height_css = ".nu-header .northeastern-logo { height:50px; }";
+        break;
+      case 'nu_library_white.png':
+        $logo_height_css = ".nu-header .northeastern-logo { height:100px; }";
+        break;
+      default:
+        $logo_height_css = ".nu-header .northeastern-logo { height:70px; }";
+        break;
     }
     
     $btn_color = get_theme_mod( 'colors_global_button_color', $quest_child_defaults['colors_global_button_color']);
@@ -810,7 +823,7 @@
     $styleHtml .= " \n figcaption .label{ background-color: $alt_color; color: $text_color; } ";
     $styleHtml .= " \n .drs-item .thumbnail figure .fa { color: $text_color }";
     $styleHtml .= " \n footer .northeastern-logo { background-image: url('$stylesheetDirectoryUri/images/$nulogo_footer_color.svg');}";
-    $styleHtml .= " \n .nu-header .northeastern-logo { background-image: url('$stylesheetDirectoryUri/images/$nulogo_header_color.svg');} "; 
+    $styleHtml .= " \n .nu-header .northeastern-logo { background-image: url('$stylesheetDirectoryUri/images/$nulogo_header_color');} "; 
     $styleHtml .= " \n $logo_height_css"; 
 
     $styleHtml .= " \n .btn, .button { color: $btn_color }; ";
@@ -829,8 +842,6 @@
     $styleHtml .= " \n #secondary{background-color: $sidebar_bg_color } ";
     $styleHtml .= " \n .current-menu-item a { color: $accent_color }";
     $styleHtml .= " \n </style>";
-    
-    error_log($styleHtml);
     
     echo $styleHtml;
   }
