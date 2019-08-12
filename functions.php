@@ -772,9 +772,9 @@
     $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
     
     if (strpos($nulogo_header_color, "lib") !== false) {
-        $logo_height = ".nu-header .northeastern-logo{height:70px;}";
+        $logo_height_css = ".nu-header .northeastern-logo{height:70px;}";
     } else {
-        $logo_height = ".nu-header .northeastern-logo{height:50px;}";
+        $logo_height_css = ".nu-header .northeastern-logo{height:50px;}";
     }
     
     $btn_color = get_theme_mod( 'colors_global_button_color', $quest_child_defaults['colors_global_button_color']);
@@ -796,36 +796,42 @@
     
     
     $styleHtml = "<style type='text/css'>";
-    $styleHtml .= " footer .nav-pills > li > a, .footer a, .custom-footer a {color: $footer_link_color } ";
-    $styleHtml .= " footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover {color: $footer_link_hover }";
-    $styleHtml .= " .nu-social > li > a{color: $footer_social_color}";
-    $styleHtml .= " .nu-social > li > a:hover, .nu-social > li > a:focus{color: $footer_social_hover }";
-    $styleHtml .= " .cell .info, .brick{ background-color: $gallery_bg_color }";
-    $styleHtml .= " .cell .info, .cell .a, .brick, .brick a{ color: $gallery_link_color } ";
-    $styleHtml .= " .carousel-caption { background-color:rgba('" . hex2rgb($gallery_bg_color) . " , .8) ' ;}";
-    $styleHtml .= " .carousel-indicators .active{background-color: $link_color }";
-    $styleHtml .= " .carousel-indicators li {border-color: $link_color }";
-    $styleHtml .= " .carousel-control{color: $link_color }";
-    $styleHtml .= " .custom-footer {background-color: $custom_footer_bg ; color: $custom_footer_color }";
-    $styleHtml .= " figcaption .label{ background-color: $alt_color; color: $text_color; } ";
-    $styleHtml .= " .drs-item .thumbnail figure .fa { color: $text_color }";
-    $styleHtml .= " footer .northeastern-logo{background-image: url('$stylesheetDirectoryUri/images/$nulogo_footer_color.svg');}";
-    $styleHtml .= " .nu-header .northeastern-logo{background-image: url('$stylesheetDirectoryUri/images/$nulogo_header_color.svg');} "; 
-    $styleHtml .= " .$logo_height.btn, .button{color: $btn_color }; ";
-    $styleHtml .= " background-color: $btn_bg_color !important; border-color: $btn_color;} ";
-    $styleHtml .= " .button: hover{box-shadow: 0 0 5px; $btn_color !important;} "; 
-    $styleHtml .= " .panel-default{border-radius:2px; border-color: $panel_border_color; box-shadow:0 1px 1px rgba('" . hex2rgb($panel_border_color) . " , .5) ' ;}"; 
-    $styleHtml .= " .panel-default > .panel-body{color: $panel_color ;background-color: $panel_bg_color }";
+    $styleHtml .= " \n footer .nav-pills > li > a, .footer a, .custom-footer a {color: $footer_link_color } ";
+    $styleHtml .= " \n footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover {color: $footer_link_hover }";
+    $styleHtml .= " \n .nu-social > li > a {color: $footer_social_color}";
+    $styleHtml .= " \n .nu-social > li > a:hover, .nu-social > li > a:focus{color: $footer_social_hover }";
+    $styleHtml .= " \n .cell .info, .brick { background-color: $gallery_bg_color }";
+    $styleHtml .= " \n .cell .info, .cell .a, .brick, .brick a{ color: $gallery_link_color } ";
+    $styleHtml .= " \n .carousel-caption { background-color:rgba(" . hex2rgb($gallery_bg_color) . " , .8)  ;}";
+    $styleHtml .= " \n .carousel-indicators .active{background-color: $link_color }";
+    $styleHtml .= " \n .carousel-indicators li {border-color: $link_color }";
+    $styleHtml .= " \n .carousel-control { color: $link_color }";
+    $styleHtml .= " \n .custom-footer { background-color: $custom_footer_bg ; color: $custom_footer_color }";
+    $styleHtml .= " \n figcaption .label{ background-color: $alt_color; color: $text_color; } ";
+    $styleHtml .= " \n .drs-item .thumbnail figure .fa { color: $text_color }";
+    $styleHtml .= " \n footer .northeastern-logo { background-image: url('$stylesheetDirectoryUri/images/$nulogo_footer_color.svg');}";
+    $styleHtml .= " \n .nu-header .northeastern-logo { background-image: url('$stylesheetDirectoryUri/images/$nulogo_header_color.svg');} "; 
+    $styleHtml .= " \n $logo_height_css"; 
+
+    $styleHtml .= " \n .btn, .button { color: $btn_color }; ";
+    $styleHtml .= " \n background-color: $btn_bg_color !important; border-color: $btn_color;} ";
+    $styleHtml .= " \n .button: hover { box-shadow: 0 0 5px $btn_color !important;} "; 
+    $styleHtml .= " \n .panel-default { border-radius:2px; border-color: $panel_border_color; box-shadow: 0 1px 1px rgba(" . hex2rgb($panel_border_color) . " , .5) ;}"; 
+    $styleHtml .= " \n .panel-default > .panel-body { color: $panel_color; background-color: $panel_bg_color; }";
+    
     
     
     if ($breadcrumbs == "no"){
-      $styleHtml .= ' ul.breadcrumbs{display:none;}';
+      $styleHtml .= " \n ul.breadcrumbs { display:none; } ";
     }
-    $styleHtml .= " .panel-default > .panel-heading { border-color: $panel_border_color ;";
+    $styleHtml .= "  \n.panel-default > .panel-heading { border-color: $panel_border_color ;";
     $styleHtml .= " color: $panel_header_color ; background-color: $panel_header_bg_color ; }";
-    $styleHtml .= " #secondary{background-color: $sidebar_bg_color } ";
-    $styleHtml .= " .current-menu-item a { color: $accent_color }";
-    $styleHtml .= " </style>";
+    $styleHtml .= " \n #secondary{background-color: $sidebar_bg_color } ";
+    $styleHtml .= " \n .current-menu-item a { color: $accent_color }";
+    $styleHtml .= " \n </style>";
+    
+    error_log($styleHtml);
+    
     echo $styleHtml;
   }
 
