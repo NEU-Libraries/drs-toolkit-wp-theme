@@ -787,8 +787,8 @@
     $text_color = quest_get_mod( 'colors_global_text', quest_get_default('colors_global_text'));
     $accent_color = quest_get_mod( 'colors_global_accent_shade', quest_get_default('colors_global_accent_shade'));
     $breadcrumbs = get_theme_mod( 'layout_global_breadcrumb', $quest_child_defaults['layout_global_breadcrumb']);
-    $styleHtml = '';
-    $styleHtml .= "<style type='text/css'>";
+
+    $styleHtml = "<style type='text/css'>";
     $styleHtml .= " footer .nav-pills > li > a, .footer a, .custom-footer a {color: $footer_link_color } ";
     $styleHtml .= " footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover {color: $footer_link_hover }";
     $styleHtml .= " .nu-social > li > a{color: $footer_social_color}";
@@ -812,9 +812,13 @@
     
     
     if ($breadcrumbs == "no"){
-      $styleHtml .= 'ul.breadcrumbs{display:none;}';
+      $styleHtml .= ' ul.breadcrumbs{display:none;}';
     }
-    $styleHtml .= '.panel-default > .panel-heading{border-color:'.$panel_border_color.';color:'.$panel_header_color.';background-color:'.$panel_header_bg_color.'} #secondary{background-color:'.$sidebar_bg_color.'} .current-menu-item a{color:'.$accent_color.'}</style>';
+    $styleHtml .= " .panel-default > .panel-heading { border-color: $panel_border_color ;";
+    $styleHtml .= " color: $panel_header_color ; background-color: $panel_header_bg_color ; }";
+    $styleHtml .= " #secondary{background-color: $sidebar_bg_color } ";
+    $styleHtml .= " .current-menu-item a { color: $accent_color }";
+    $styleHtml .= " </style>";
     echo $styleHtml;
   }
 
