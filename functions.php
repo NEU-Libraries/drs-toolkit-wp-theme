@@ -771,8 +771,6 @@
     $nulogo_footer_color = get_theme_mod( 'colors_footer_nulogo', $quest_child_defaults['colors_footer_nulogo']);
     $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
     
-    
-    error_log($nulogo_header_color);
     switch ($nulogo_header_color) {
       case 'lib-dark.svg':
       case 'lib-light.svg':
@@ -825,14 +823,11 @@
     $styleHtml .= " \n footer .northeastern-logo { background-image: url('$stylesheetDirectoryUri/images/$nulogo_footer_color.svg');}";
     $styleHtml .= " \n .nu-header .northeastern-logo { background-image: url('$stylesheetDirectoryUri/images/$nulogo_header_color');} "; 
     $styleHtml .= " \n $logo_height_css"; 
-
     $styleHtml .= " \n .btn, .button { color: $btn_color }; ";
     $styleHtml .= " \n background-color: $btn_bg_color !important; border-color: $btn_color;} ";
     $styleHtml .= " \n .button: hover { box-shadow: 0 0 5px $btn_color !important;} "; 
     $styleHtml .= " \n .panel-default { border-radius:2px; border-color: $panel_border_color; box-shadow: 0 1px 1px rgba(" . hex2rgb($panel_border_color) . " , .5) ;}"; 
     $styleHtml .= " \n .panel-default > .panel-body { color: $panel_color; background-color: $panel_bg_color; }";
-    
-    
     
     if ($breadcrumbs == "no"){
       $styleHtml .= " \n ul.breadcrumbs { display:none; } ";
