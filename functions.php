@@ -27,6 +27,7 @@
   		'lib-dark' => __( 'Library Logo-dark', 'quest' ),
       'nu-light'   => __( 'Northeastern Logo- light', 'quest' ),
   		'nu-dark' => __( 'Northeastern Logo- dark', 'quest' ),
+      'nu-library-white' => __( 'Northeaster Library- latest'),
   	);
   $quest_child_defaults['choices']['layout_global_breadcrumb'] = array(
       "yes" => __("Yes", "quest"),
@@ -791,7 +792,9 @@
     $text_color = quest_get_mod( 'colors_global_text', quest_get_default('colors_global_text'));
     $accent_color = quest_get_mod( 'colors_global_accent_shade', quest_get_default('colors_global_accent_shade'));
     $breadcrumbs = get_theme_mod( 'layout_global_breadcrumb', $quest_child_defaults['layout_global_breadcrumb']);
-
+    $stylesheetDirectoryUri = get_stylesheet_directory_uri();
+    
+    
     $styleHtml = "<style type='text/css'>";
     $styleHtml .= " footer .nav-pills > li > a, .footer a, .custom-footer a {color: $footer_link_color } ";
     $styleHtml .= " footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover {color: $footer_link_hover }";
@@ -806,8 +809,8 @@
     $styleHtml .= " .custom-footer {background-color: $custom_footer_bg ; color: $custom_footer_color }";
     $styleHtml .= " figcaption .label{ background-color: $alt_color; color: $text_color } ";
     $styleHtml .= " .drs-item .thumbnail figure .fa{ color: $text_color }";
-    $styleHtml .= " footer .northeastern-logo{background-image: url('" .get_stylesheet_directory_uri() . "/images/$nulogo_footer_color.svg);}";
-    $styleHtml .= " .nu-header .northeastern-logo{background-image: url('" .get_stylesheet_directory_uri(). "/images/$nulogo_header_color.svg);} "; 
+    $styleHtml .= " footer .northeastern-logo{background-image: url('$stylesheetDirectoryUri/images/$nulogo_footer_color.svg');}";
+    $styleHtml .= " .nu-header .northeastern-logo{background-image: url('$stylesheetDirectoryUri/images/$nulogo_header_color.svg');} "; 
     $styleHtml .= " .$logo_height.btn, .button{color: $btn_color }; ";
     $styleHtml .= " background-color: $btn_bg_color !important;border-color: $btn_color ;} ";
     $styleHtml .= " .button: hover{box-shadow: 0 0 5px $btn_color  !important;} "; 
