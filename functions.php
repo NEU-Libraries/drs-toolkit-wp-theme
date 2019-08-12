@@ -769,9 +769,13 @@
     $custom_footer_color = get_theme_mod( 'colors_footer_dsg_color', $quest_child_defaults['colors_footer_dsg_color']);
     $nulogo_footer_color = get_theme_mod( 'colors_footer_nulogo', $quest_child_defaults['colors_footer_nulogo']);
     $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
+    
     if (strpos($nulogo_header_color, "lib") !== false) {
-        $logo_height = ".nu-header .northeastern-logo{height:70px;}";}
-    else {$logo_height = ".nu-header .northeastern-logo{height:50px;}";}
+        $logo_height = ".nu-header .northeastern-logo{height:70px;}";
+    } else {
+        $logo_height = ".nu-header .northeastern-logo{height:50px;}";
+    }
+    
     $btn_color = get_theme_mod( 'colors_global_button_color', $quest_child_defaults['colors_global_button_color']);
     $btn_bg_color = get_theme_mod( 'colors_global_button_bg', $quest_child_defaults['colors_global_button_bg']);
     $panel_color = get_theme_mod( 'colors_panels_color', $quest_child_defaults['colors_panels_color']);
