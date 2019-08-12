@@ -807,13 +807,13 @@
     $styleHtml .= " .carousel-indicators li {border-color: $link_color }";
     $styleHtml .= " .carousel-control{color: $link_color }";
     $styleHtml .= " .custom-footer {background-color: $custom_footer_bg ; color: $custom_footer_color }";
-    $styleHtml .= " figcaption .label{ background-color: $alt_color; color: $text_color } ";
-    $styleHtml .= " .drs-item .thumbnail figure .fa{ color: $text_color }";
+    $styleHtml .= " figcaption .label{ background-color: $alt_color; color: $text_color; } ";
+    $styleHtml .= " .drs-item .thumbnail figure .fa { color: $text_color }";
     $styleHtml .= " footer .northeastern-logo{background-image: url('$stylesheetDirectoryUri/images/$nulogo_footer_color.svg');}";
     $styleHtml .= " .nu-header .northeastern-logo{background-image: url('$stylesheetDirectoryUri/images/$nulogo_header_color.svg');} "; 
     $styleHtml .= " .$logo_height.btn, .button{color: $btn_color }; ";
-    $styleHtml .= " background-color: $btn_bg_color !important;border-color: $btn_color ;} ";
-    $styleHtml .= " .button: hover{box-shadow: 0 0 5px $btn_color  !important;} "; 
+    $styleHtml .= " background-color: $btn_bg_color !important; border-color: $btn_color;} ";
+    $styleHtml .= " .button: hover{box-shadow: 0 0 5px; $btn_color !important;} "; 
     $styleHtml .= " .panel-default{border-radius:2px; border-color: $panel_border_color; box-shadow:0 1px 1px rgba('" . hex2rgb($panel_border_color) . " , .5) ' ;}"; 
     $styleHtml .= " .panel-default > .panel-body{color: $panel_color ;background-color: $panel_bg_color }";
     
