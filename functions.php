@@ -795,7 +795,7 @@
     $styleHtml .= " .nu-social > li > a:hover, .nu-social > li > a:focus{color: $footer_social_hover }";
     $styleHtml .= " .cell .info, .brick{ background-color: $gallery_bg_color }";
     $styleHtml .= " .cell .info, .cell .a, .brick, .brick a{ color: $gallery_link_color } ";
-    $styleHtml .= " .carousel-caption { background-color:rgba(hex2rgb($gallery_bg_color) , .8)}";
+    $styleHtml .= " .carousel-caption { background-color:rgba('" . hex2rgb($gallery_bg_color) . " , .8) ' ;}";
     $styleHtml .= " .carousel-indicators .active{background-color: $link_color }";
     $styleHtml .= " .carousel-indicators li {border-color: $link_color }";
     $styleHtml .= " .carousel-control{color: $link_color }";
