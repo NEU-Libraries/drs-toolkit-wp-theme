@@ -27,7 +27,8 @@
   		'lib-dark.svg' => __( 'Library Logo-dark', 'quest' ),
       'nu-light.svg'   => __( 'Northeastern Logo- light', 'quest' ),
   		'nu-dark.svg' => __( 'Northeastern Logo- dark', 'quest' ),
-      'nu_library_white.svg' => __( 'Northeastern Library- latest', 'quest'),
+      'nu_library_white.svg' => __( 'Northeastern Library- latest SVG', 'quest'),
+      'nu_library_white.png' => __( 'Northeastern Library- latest PNG', 'quest'),
   	);
   $quest_child_defaults['choices']['layout_global_breadcrumb'] = array(
       "yes" => __("Yes", "quest"),
