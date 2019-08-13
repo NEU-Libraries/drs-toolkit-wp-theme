@@ -781,6 +781,7 @@
         $logo_height_css = ".nu-header .northeastern-logo { height:50px; }";
         break;
       case 'nu_library_white.png':
+      case 'nu_library_white.svg':
         $logo_height_css = ".nu-header .northeastern-logo { height:100px; }";
         break;
       default:
