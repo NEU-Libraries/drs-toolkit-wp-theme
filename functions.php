@@ -23,10 +23,12 @@
 			'nu-dark' => __( 'Northeastern Logo- dark', 'quest' )
 		);
   $quest_child_defaults['choices']['colors_header_nulogo'] = array(
-  		'lib-light'   => __( 'Library Logo- light', 'quest' ),
-  		'lib-dark' => __( 'Library Logo-dark', 'quest' ),
-      'nu-light'   => __( 'Northeastern Logo- light', 'quest' ),
-  		'nu-dark' => __( 'Northeastern Logo- dark', 'quest' ),
+  		'lib-light.svg'   => __( 'Library Logo- light', 'quest' ),
+  		'lib-dark.svg' => __( 'Library Logo-dark', 'quest' ),
+      'nu-light.svg'   => __( 'Northeastern Logo- light', 'quest' ),
+  		'nu-dark.svg' => __( 'Northeastern Logo- dark', 'quest' ),
+      'nu_library_white-01.svg' => __( 'Northeastern Library- latest SVG', 'quest'),
+      'nu_library_white.png' => __( 'Northeastern Library- latest PNG', 'quest'),
   	);
   $quest_child_defaults['choices']['layout_global_breadcrumb'] = array(
       "yes" => __("Yes", "quest"),
@@ -313,13 +315,19 @@
   function nu_before_header(){
     global $quest_child_defaults;
     $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
-    echo "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'><a href='";
+    
+    $html = '';
+    $html .= "<header class='secondary-header nu-header'><div class='container'><div class='row'><div class='col-md-6'>";
+    
     if (strpos($nulogo_header_color, 'lib') !== false){
-      echo "http://library.northeastern.edu";
+      $html .= "<a href='http://library.northeastern.edu' target='_blank' class='northeastern-logo'>";
     } else {
-      echo "http://northeastern.edu";
+      $html .= "<a href='http://northeastern.edu' target='_blank' class='northeastern-logo'>";
     }
-    echo "' target='_blank' class='northeastern-logo'><span class='sr-only'>Northeastern University</span></a></a></div></div></div></header>";
+    $html .= "<span class='sr-only'>Northeastern University</span></a></div></div></div></header>";
+    //$html .= "<img src='https://library.northeastern.edu/sites/default/files/public/wysiwyg/u-473/2019/nu_library_white.png' 
+    //               alt='Northeastern University logo' /></a></div></div></div></header>";
+    echo $html;
   }
 
   /*adds customization colors for footer links, footer nu logo, and header nu logo*/
@@ -769,7 +777,25 @@
     $custom_footer_color = get_theme_mod( 'colors_footer_dsg_color', $quest_child_defaults['colors_footer_dsg_color']);
     $nulogo_footer_color = get_theme_mod( 'colors_footer_nulogo', $quest_child_defaults['colors_footer_nulogo']);
     $nulogo_header_color = get_theme_mod( 'colors_header_nulogo', $quest_child_defaults['colors_header_nulogo']);
-    if (strpos($nulogo_header_color, "lib") !== false){ $logo_height = ".nu-header .northeastern-logo{height:70px;}";} else {$logo_height = ".nu-header .northeastern-logo{height:50px;}";}
+    
+    switch ($nulogo_header_color) {
+      case 'lib-dark.svg':
+      case 'lib-light.svg':
+        $logo_height_css = ".nu-header .northeastern-logo { height:70px; }";
+        break;
+      case 'nu-dark.svg':
+      case 'nu-light.svg':
+        $logo_height_css = ".nu-header .northeastern-logo { height:50px; }";
+        break;
+      case 'nu_library_white.png':
+      case 'nu_library_white-01.svg':
+        $logo_height_css = ".nu-header .northeastern-logo { height:100px; }";
+        break;
+      default:
+        $logo_height_css = ".nu-header .northeastern-logo { height:70px; }";
+        break;
+    }
+    
     $btn_color = get_theme_mod( 'colors_global_button_color', $quest_child_defaults['colors_global_button_color']);
     $btn_bg_color = get_theme_mod( 'colors_global_button_bg', $quest_child_defaults['colors_global_button_bg']);
     $panel_color = get_theme_mod( 'colors_panels_color', $quest_child_defaults['colors_panels_color']);
@@ -785,12 +811,42 @@
     $text_color = quest_get_mod( 'colors_global_text', quest_get_default('colors_global_text'));
     $accent_color = quest_get_mod( 'colors_global_accent_shade', quest_get_default('colors_global_accent_shade'));
     $breadcrumbs = get_theme_mod( 'layout_global_breadcrumb', $quest_child_defaults['layout_global_breadcrumb']);
-    echo '<style type="text/css">footer .nav-pills > li > a, .footer a, .custom-footer a{color:'.$footer_link_color.'} footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover{color:'.$footer_link_hover.'} .nu-social > li > a{color:'.$footer_social_color.'} .nu-social > li > a:hover, .nu-social > li > a:focus{color:'.$footer_social_hover.'} .cell .info, .brick{ background-color:'.$gallery_bg_color.'} .cell .info, .cell .a, .brick, .brick a{ color:'.$gallery_link_color.'}.carousel-caption { background-color:rgba('.hex2rgb($gallery_bg_color).', .8)} .carousel-indicators .active{background-color:'.$link_color.'} .carousel-indicators li {border-color:'.$link_color.'} .carousel-control{color:'.$link_color.'}.custom-footer {background-color:'.$custom_footer_bg.';color:'.$custom_footer_color.'}figcaption .label{ background-color:'.$alt_color.';color:'.$text_color.'} .drs-item .thumbnail figure .fa{ color:'.$text_color.'}';
-    echo ' footer .northeastern-logo{background-image: url('.get_stylesheet_directory_uri().'/images/'.$nulogo_footer_color.'.svg);} .nu-header .northeastern-logo{background-image: url('.get_stylesheet_directory_uri().'/images/'.$nulogo_header_color.'.svg);} '.$logo_height.'.btn, .button{color:'.$btn_color.';background-color:'.$btn_bg_color.' !important;border-color:'.$btn_color.';}.button:hover{box-shadow: 0 0 5px '.$btn_color.' !important;}.panel-default{border-radius:2px; border-color:'.$panel_border_color.' ; box-shadow:0 1px 1px rgba('.hex2rgb($panel_border_color).', .5);} .panel-default > .panel-body{color:'.$panel_color.';background-color:'.$panel_bg_color.'}';
+    $stylesheetDirectoryUri = get_stylesheet_directory_uri();
+    
+    
+    $styleHtml = "<style type='text/css'>";
+    $styleHtml .= " \n footer .nav-pills > li > a, .footer a, .custom-footer a {color: $footer_link_color } ";
+    $styleHtml .= " \n footer .nav-pills > li > a:hover, footer .nav-pills > li > a:focus, .custom-footer p a:hover {color: $footer_link_hover }";
+    $styleHtml .= " \n .nu-social > li > a {color: $footer_social_color}";
+    $styleHtml .= " \n .nu-social > li > a:hover, .nu-social > li > a:focus{color: $footer_social_hover }";
+    $styleHtml .= " \n .cell .info, .brick { background-color: $gallery_bg_color }";
+    $styleHtml .= " \n .cell .info, .cell .a, .brick, .brick a{ color: $gallery_link_color } ";
+    $styleHtml .= " \n .carousel-caption { background-color:rgba(" . hex2rgb($gallery_bg_color) . " , .8)  ;}";
+    $styleHtml .= " \n .carousel-indicators .active{background-color: $link_color }";
+    $styleHtml .= " \n .carousel-indicators li {border-color: $link_color }";
+    $styleHtml .= " \n .carousel-control { color: $link_color }";
+    $styleHtml .= " \n .custom-footer { background-color: $custom_footer_bg ; color: $custom_footer_color }";
+    $styleHtml .= " \n figcaption .label{ background-color: $alt_color; color: $text_color; } ";
+    $styleHtml .= " \n .drs-item .thumbnail figure .fa { color: $text_color }";
+    $styleHtml .= " \n footer .northeastern-logo { background-image: url('$stylesheetDirectoryUri/images/$nulogo_footer_color.svg');}";
+    $styleHtml .= " \n .nu-header .northeastern-logo { background-image: url('$stylesheetDirectoryUri/images/$nulogo_header_color');} "; 
+    $styleHtml .= " \n $logo_height_css"; 
+    $styleHtml .= " \n .btn, .button { color: $btn_color }; ";
+    $styleHtml .= " \n background-color: $btn_bg_color !important; border-color: $btn_color;} ";
+    $styleHtml .= " \n .button: hover { box-shadow: 0 0 5px $btn_color !important;} "; 
+    $styleHtml .= " \n .panel-default { border-radius:2px; border-color: $panel_border_color; box-shadow: 0 1px 1px rgba(" . hex2rgb($panel_border_color) . " , .5) ;}"; 
+    $styleHtml .= " \n .panel-default > .panel-body { color: $panel_color; background-color: $panel_bg_color; }";
+    
     if ($breadcrumbs == "no"){
-      echo 'ul.breadcrumbs{display:none;}';
+      $styleHtml .= " \n ul.breadcrumbs { display:none; } ";
     }
-    echo '.panel-default > .panel-heading{border-color:'.$panel_border_color.';color:'.$panel_header_color.';background-color:'.$panel_header_bg_color.'} #secondary{background-color:'.$sidebar_bg_color.'} .current-menu-item a{color:'.$accent_color.'}</style>';
+    $styleHtml .= "  \n.panel-default > .panel-heading { border-color: $panel_border_color ;";
+    $styleHtml .= " color: $panel_header_color ; background-color: $panel_header_bg_color ; }";
+    $styleHtml .= " \n #secondary{background-color: $sidebar_bg_color } ";
+    $styleHtml .= " \n .current-menu-item a { color: $accent_color }";
+    $styleHtml .= " \n </style>";
+    
+    echo $styleHtml;
   }
 
 
